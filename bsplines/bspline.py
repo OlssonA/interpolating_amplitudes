@@ -15,7 +15,6 @@ class Bspline:
         #False means not-a-knot.
         self.uniform_knots = uniform_knots
         #verify that all data points are interpolated with tolerance 1e-10
-        self.check_interpolated_values = check_interpolated_values
         self.verbose = verbose
 
         if self.verbose:
@@ -34,11 +33,13 @@ class Bspline:
         else: self.generate_not_a_knot_vectors()
         if self.verbose:
             if uniform_knots: print('Knots are uniform')
-            else: print('not-a-knot construction')
+            else: print('Not-a-knot construction')
         
         if self.verbose:
             print(f'Constructing bspline of degree {self.degrees[0]}, n={n[0]}..')
         self.compute_control_points()
+
+        if check_interpolated_values: self.check_valid_interpolation()
 
     #Uniform knot-vector (equidistant knots)
     def generate_uniform_knot_vectors(self):
@@ -148,7 +149,7 @@ class Bspline:
         from scipy.optimize import lsq_linear
         self.control_points = lsq_linear(basis_matrix, self.data_values, verbose=0).x
         if self.verbose:
-            print(f'Created bspline with {len(self.control_points)} points')
+            print(f'Created B-spline with {len(self.control_points)} points')
     
     #Evaluate the B-spline at any point inside of the parameter space
     def evaluate_point(self, point):
@@ -176,4 +177,4 @@ class Bspline:
             print(len(bad_indices), 'data points were not interpolated '
                     'within', tol)
         else:
-            print('All data points were interpolated within', tol)
+            print('All data points were interpolated within', tol, 'tolerance')
