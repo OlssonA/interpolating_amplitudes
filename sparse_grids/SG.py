@@ -33,7 +33,7 @@ class SG:
             print(f'Training level {n} adaptive sparse grid')
             print(f'Refinement strategy is: {refinement_strategy}')
             print(f'The point threshold is {int(point_threshold)} points')
-            print('current time:', str(datetime.now()))
+            print('Current time:', str(datetime.now()))
 
         if saved_grid:
             if self.verbose:
@@ -216,8 +216,8 @@ class SG:
                         
         self.points = len(self.used_points)
         if self.verbose:
-            print('used points:', self.points)
-            print('current time:', str(datetime.now()))
+            print('Used points:', self.points)
+            print('Current time:', str(datetime.now()))
 
         if self.check_interpolated_points:
             tol = 1e-10
