@@ -1,0 +1,97 @@
+model:
+  _target_: experiments.wrappers.AmplitudeMLPWrapper
+  net:
+    _target_: experiments.baselines.mlp.MLP
+    in_shape: 10
+    out_shape: 1
+    hidden_channels: 512
+    hidden_layers: 5
+    float64: false
+exp_name: amp
+exp_type: amplitudes
+run_name: qq_tth_loop
+enable_flash_sdp: false
+enable_math_sdp: true
+enable_mem_efficient_sdp: false
+evaluation:
+  batchsize: 1024
+defaults:
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+base_dir: /Users/victorbreso/interpolation_mine/GATr_tth
+data:
+  dataset:
+  - qq_tth_loop_test
+  data_path: data/
+  kfac: true
+  invariants_small: true
+  particles_prepd_mean:
+  - 2.30998774
+  - 0.0
+  - 0.0
+  - 2.30998774
+  - 2.30998774
+  - 0.0
+  - 0.0
+  - -2.30998774
+  - 1.66389105
+  - -0.391230821
+  - 0.509887381
+  - 0.000116736933
+  - 1.66390572
+  - -0.391098059
+  - -0.509887381
+  - -0.000148446925
+  - 1.29217871
+  - 0.78232888
+  - 0.0
+  - 3.17099921e-05
+  - 2.2829751
+  - 1.12551694
+  - 1.1256677
+  - 0.847471749
+  - 1.12566674
+  - 1.12554814
+  - 0.847495886
+  - 1.17665359
+  - 0.7679505
+  - 0.767949673
+  particles_prepd_std:
+  - 0.74981276
+  - 0.01
+  - 0.01
+  - 0.74981276
+  - 0.74981276
+  - 0.01
+  - 0.01
+  - 0.74981276
+  - 0.64731739
+  - 0.8856999
+  - 0.45661372
+  - 0.88405098
+  - 0.64700152
+  - 0.8857216
+  - 0.45661372
+  - 0.88388434
+  - 0.56027495
+  - 0.56695575
+  - 0.01
+  - 0.72692324
+  - 0.55632531
+  - 0.7392732
+  - 0.7392937
+  - 0.77349399
+  - 0.73924438
+  - 0.73926191
+  - 0.77359377
+  - 0.72725921
+  - 0.73737269
+  - 0.73727036
+  prepd_mean: null
+  prepd_std: null
+run_idx: 0
+run_dir: /Users/victorbreso/interpolation_mine/GATr_tth/models/qq_tth_loop_mlp
