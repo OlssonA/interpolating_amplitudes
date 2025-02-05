@@ -1,6 +1,7 @@
 ## Standard science stack
 h5py
-numpy>=1.25.0,<=1.26.4
+matplotlib
+numpy==1.23
 scipy
 
 ## Standard utils
@@ -9,7 +10,7 @@ tqdm
 ## Deep learning
 einops
 git+https://github.com/dgasmith/opt_einsum.git@1a984b7b75f3e532e7129f6aa13f7ddc3da66e10 # Un-released latest master (pinned for repro); the latest released version 3.3.0 has bugs in shape-based contraction path computations (used for einsum)
-torch==2.2.0
+torch==2.0.1
 
 ## Experiment management
 hydra-core
@@ -17,3 +18,4 @@ hydra-core
 ## Project-specific: general
 clifford==1.4.0
 numba==0.58.1 # otherwise has conflicts
+xformers==0.0.20
