@@ -1,4 +1,4 @@
-base_dir: /Users/victorbreso/interpolation_mine/GATr_tth
+base_dir: ./
 run_idx: 0
 
 exp_name: amp
