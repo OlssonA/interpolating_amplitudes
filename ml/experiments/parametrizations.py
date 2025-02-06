@@ -1,13 +1,5 @@
 import math
-import os
-import random
-import struct
-import subprocess
-
 import numpy as np
-from numpy.linalg import inv
-import scipy.stats.qmc
-import multiprocessing
 
 
 # General functions
@@ -110,45 +102,30 @@ def p_to_x_tth(data):
     p = data.reshape((-1, 5, 4))
 
     p_tt = p[:, 2] + p[:,3]
-    p_fin = p[:, 2] + p[:,3] + p[:,4]
+    p_fin = p_tt + p[:,4]
 
     s_tt = inner_p(p_tt, p_tt)
     s_hat = inner_p(p_fin, p_fin)
 
     beta2 = 1 - (2*MT + MH)**2/s_hat
     frac_stt = (s_tt - 4*MT**2)/((np.sqrt(s_hat)-MH)**2 - 4*MT**2)
-
     theta_H = angle_between(p[:, 0, 1:], p[:, 4, 1:])
-
     qh = np.sqrt(kallen(s_hat, s_tt, MH**2)/4/s_hat)
 
-    p1_ini = p[:, 0]
-    p2_ini = p[:, 1]
-    p1_cm = p[:, 2]
-    p2_cm = p[:, 3]
-    ph_cm = p[:, 4]
+    p1_ini, p2_ini, p1_cm, p2_cm, ph_cm = p[:, 0], p[:, 1], p[:, 2], p[:, 3], p[:, 4]
 
-    boost = np.zeros((p.shape[0], 4, 4))
-    rot = np.zeros((p.shape[0], 4, 4))
+    # Apply rotations
+    rot = np.array([rotate_func(p2_ini[i, 1:], ph_cm[i, 1:])[0] for i in range(len(p))])
+    p1_rot = np.array([rot[i] @ p1_cm[i] for i in range(len(p))])
+    p2_rot = np.array([rot[i] @ p2_cm[i] for i in range(len(p))])
+    ptt_rot = np.array([rot[i] @ p_tt[i] for i in range(len(p))])
 
-    p1_rot = np.zeros((p.shape[0], 4))
-    p2_rot = np.zeros((p.shape[0], 4))
-    ptt_rot = np.zeros((p.shape[0], 4))
-    p1_boost = np.zeros((p.shape[0], 4))
-    p2_boost = np.zeros((p.shape[0], 4))
-
-    for i in range(p.shape[0]):
-        rot[i], axis, cos_theta, p1_uni, p2_uni = rotate_func(p2_ini[i, 1:], ph_cm[i, 1:])
-        p1_rot[i] = rot[i]@p1_cm[i]
-        p2_rot[i] = rot[i]@p2_cm[i]
-        ptt_rot[i] = rot[i]@(p1_cm[i]+p2_cm[i])
-
-        boost[i] = boost_func(p1_rot[i], p2_rot[i])
-        p1_boost[i] = boost[i]@p1_rot[i]
-        p2_boost[i] = boost[i]@p2_rot[i]
+    # Apply boosts
+    boost = np.array([boost_func(p1_rot[i], p2_rot[i]) for i in range(len(p))])
+    p1_boost = np.array([boost[i] @ p1_rot[i] for i in range(len(p))])
+    p2_boost = np.array([boost[i] @ p2_rot[i] for i in range(len(p))])
 
     theta_T = angle_between(p1_boost[:, 1:], ptt_rot[:, 1:])
-
     cosphit = p1_boost[:,1]/(np.sin(theta_T)*np.sqrt(s_tt/4 - MT**2))
     phi_T = np.arccos(np.clip(cosphit, -1.0, 1.0))
     
@@ -165,18 +142,13 @@ def x_to_p_gggh(data):
     
     beta2, theta_h = data[:,0], data[:,1]
     s = mh2 / (1-beta2)
-    
-    q1 = np.zeros((len(data), 4))
-    q2 = np.zeros((len(data), 4))
-    p1 = np.zeros((len(data), 4))
-    p2 = np.zeros((len(data), 4))
-    
-    for i in range(data.shape[0]):
-        q1[i] = np.array((1., 0., 0., +1.))*np.sqrt(s[i])/2
-        q2[i] = np.array((1., 0., 0., -1.))*np.sqrt(s[i])/2
-        p1[i] = np.array((1., 0., -np.sin(theta_h[i]), -np.cos(theta_h[i])))*(s[i]-mh2)/(2*np.sqrt(s[i]))
-        p2[i] = np.array((s[i]+mh2, 0., (s[i]-mh2)*np.sin(theta_h[i]), (s[i]-mh2)*np.cos(theta_h[i])))/(2*np.sqrt(s[i]))
-        
+    factor = (s - mh2) / (2 * np.sqrt(s))
+
+    q1 = np.column_stack((np.ones(len(data)), np.zeros(len(data)), np.zeros(len(data)), np.sqrt(s) / 2))
+    q2 = np.column_stack((np.ones(len(data)), np.zeros(len(data)), np.zeros(len(data)), -np.sqrt(s) / 2))
+    p1 = np.column_stack((np.ones(len(data)), np.zeros(len(data)), -np.sin(theta_h) * factor, -np.cos(theta_h) * factor))
+    p2 = np.column_stack(((s + mh2) / (2 * np.sqrt(s)), np.zeros(len(data)), (s - mh2) * np.sin(theta_h) / (2 * np.sqrt(s)), (s - mh2) * np.cos(theta_h) / (2 * np.sqrt(s))))
+
     p = np.concatenate((q1, q2, p1, p2), axis=-1)
     
     return p

@@ -41,7 +41,7 @@ enable_math_sdp: true
 enable_mem_efficient_sdp: false
 evaluation:
   batchsize: 1024
-base_dir: /Users/victorbreso/interpolation_mine/GATr_tth
+base_dir: ./
 data:
   dataset:
   - gg_tth_test
@@ -52,4 +52,4 @@ data:
   prepd_mean: null
   prepd_std: null
 run_idx: 0
-run_dir: /Users/victorbreso/interpolation_mine/GATr_tth/models/gg_tth_gatr
+run_dir: ./models/gg_tth_gatr

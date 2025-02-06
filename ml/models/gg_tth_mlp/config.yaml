@@ -22,7 +22,7 @@ hydra:
   run:
     dir: .
   output_subdir: null
-base_dir: /Users/victorbreso/interpolation_mine/GATr_tth
+base_dir: ./
 data:
   dataset:
   - gg_tth_test
@@ -93,4 +93,4 @@ data:
   prepd_mean: null
   prepd_std: null
 run_idx: 0
-run_dir: /Users/victorbreso/interpolation_mine/GATr_tth/models/gg_tth_mlp
+run_dir: ./models/gg_tth_mlp
