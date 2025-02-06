@@ -1,4 +1,4 @@
-model:
+network:
   _target_: experiments.wrappers.AmplitudeMLPWrapper
   net:
     _target_: experiments.baselines.mlp.MLP
@@ -7,27 +7,13 @@ model:
     hidden_channels: 512
     hidden_layers: 5
     float64: false
-exp_name: amp
-exp_type: amplitudes
-run_name: qq_tth_mlp
-enable_flash_sdp: false
-enable_math_sdp: true
-enable_mem_efficient_sdp: false
-evaluation:
-  batchsize: 1024
-defaults:
-  - override hydra/hydra_logging: disabled
-  - override hydra/job_logging: disabled
-hydra:
-  run:
-    dir: .
-  output_subdir: null
-base_dir: ./
+run_name: qq_tth_loop
 data:
   dataset:
-  - qq_tth_test
+  - qq_tth_loop_test
   data_path: data/
-  kfac: false
+  kfac: true
+  invariants_small: true
   particles_prepd_mean:
   - 2.30998774
   - 0.0
@@ -92,5 +78,4 @@ data:
   - 0.73727036
   prepd_mean: null
   prepd_std: null
-run_idx: 0
-run_dir: ./models/qq_tth_mlp
+run_dir: ${base_dir}/models/qq_tth_loop_mlp

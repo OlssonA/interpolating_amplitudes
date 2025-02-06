@@ -2,6 +2,7 @@ import torch
 
 from gatr.primitives.invariants import abs_squared_norm
 
+
 def equi_layer_norm(
     x: torch.Tensor, channel_dim: int = -2, gain: float = 1.0, epsilon: float = 0.01
 ) -> torch.Tensor:

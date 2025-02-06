@@ -5,6 +5,7 @@ from torch import nn
 from gatr.interface import embed_vector, extract_scalar
 from gatr.layers import EquiLinear, GeometricBilinear, ScalarGatedNonlinearity
 
+
 def encode_tokens(type_token, global_token, token_size, isgatr, batchsize, device):
     """Compute embedded type_token and global_token to be used within Transformers
 
@@ -47,6 +48,7 @@ def encode_tokens(type_token, global_token, token_size, isgatr, batchsize, devic
 
     return type_token, global_token
 
+
 class AmplitudeMLPWrapper(nn.Module):
     def __init__(self, net):
         super().__init__()
@@ -54,7 +56,7 @@ class AmplitudeMLPWrapper(nn.Module):
 
     def forward(self, inputs, type_token, global_token):
         # ignore type_token and global_token (architecture is not permutation invariant)
-        out = self.net(inputs[:,(len(type_token)*4):])
+        out = self.net(inputs[:, (len(type_token) * 4) :])
         return out
 
 

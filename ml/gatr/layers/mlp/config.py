@@ -21,7 +21,7 @@ class MLPConfig:
         Which (gated) activation function to use
     dropout_prob : float or None
         Dropout probability
-     """
+    """
 
     mv_channels: Optional[List[int]] = None
     s_channels: Optional[List[int]] = None

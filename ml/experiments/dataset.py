@@ -1,5 +1,6 @@
 import torch
 
+
 class AmplitudeDataset(torch.utils.data.Dataset):
     def __init__(self, particles, amplitudes, sm, dtype):
         self.particles = torch.tensor(particles, dtype=dtype)

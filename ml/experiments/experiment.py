@@ -24,11 +24,11 @@ TYPE_TOKEN_DICT = {
     "qq_tth_loop_test": [0, 1, 2, 3, 4],
     "gg_tth_test": [0, 0, 1, 1, 2],
     "gg_tth_loop_test": [0, 0, 1, 1, 2],
-    "gggh_test": [0, 0, 1, 2]
+    "gggh_test": [0, 0, 1, 2],
 }
 
-class AmplitudeExperiment:
 
+class AmplitudeExperiment:
     def __init__(self, cfg):
         self.cfg = cfg
 
@@ -39,11 +39,9 @@ class AmplitudeExperiment:
 
         torch.backends.cuda.enable_flash_sdp(self.cfg.enable_flash_sdp)
         torch.backends.cuda.enable_math_sdp(self.cfg.enable_math_sdp)
-        torch.backends.cuda.enable_mem_efficient_sdp(
-            self.cfg.enable_mem_efficient_sdp
-        )
+        torch.backends.cuda.enable_mem_efficient_sdp(self.cfg.enable_mem_efficient_sdp)
         self.dtype = torch.float32
-        run_name = self.cfg.run_name
+        run_name = self.cfg.model.run_name
         print(f"### Starting experiment {self.cfg.exp_name}/{run_name} ###")
         self.full_run()
 
@@ -64,13 +62,13 @@ class AmplitudeExperiment:
             )
         dt = time.time() - t0
         print(
-            f"Finished experiment {self.cfg.exp_name}/{self.cfg.run_name} after {dt/60:.2f}min = {dt/60**2:.2f}h"
+            f"Finished experiment {self.cfg.exp_name}/{self.cfg.model.run_name} after {dt/60:.2f}min = {dt/60**2:.2f}h"
         )
 
     def init_model(self):
 
         # initialize model
-        self.model = instantiate(self.cfg.model)
+        self.model = instantiate(self.cfg.model.network)
         num_parameters = sum(
             p.numel() for p in self.model.parameters() if p.requires_grad
         )
@@ -79,9 +77,7 @@ class AmplitudeExperiment:
         )
 
         # load existing model
-        model_path = os.path.join(
-            self.cfg.run_dir, "models", f"model_run0.pt"
-        )
+        model_path = os.path.join(self.cfg.model.run_dir, f"model_run0.pt")
         try:
             state_dict = torch.load(model_path, map_location="cpu")["model"]
         except FileNotFoundError:
@@ -90,39 +86,43 @@ class AmplitudeExperiment:
         self.model.load_state_dict(state_dict)
 
         self.model.to(self.device, dtype=self.dtype)
-        
+
     def init_physics(self):
 
         # create type_token list
-        self.dataset = self.cfg.data.dataset[0]
+        self.dataset = self.cfg.model.data.dataset[0]
         self.type_token = TYPE_TOKEN_DICT[self.dataset]
 
         token_size = max(self.type_token) + 1
-        self.modelname = self.cfg.model.net._target_.rsplit(".", 1)[-1]
+        self.modelname = self.cfg.model.network.net._target_.rsplit(".", 1)[-1]
 
         with open_dict(self.cfg):
             # specify shape for type_token and MLPs
             if self.modelname == "GATr":
-                self.cfg.model.net.in_s_channels = token_size
-                self.cfg.model.token_size = token_size
+                self.cfg.model.network.net.in_s_channels = token_size
+                self.cfg.model.network.token_size = token_size
             elif self.modelname == "MLP":
-                self.cfg.model.net.in_shape = sum(range(1, len(TYPE_TOKEN_DICT[self.cfg.data.dataset[0]])))
+                self.cfg.model.network.net.in_shape = sum(
+                    range(1, len(TYPE_TOKEN_DICT[self.cfg.model.data.dataset[0]]))
+                )
             else:
                 raise ValueError(f"model {self.modelname} not implemented")
 
             # reinsert_type_token
-            if self.modelname == "GATr" and self.cfg.model.reinsert_type_token:
-                self.cfg.model.net.reinsert_s_channels = list(range(n_type_tokens))
+            if self.modelname == "GATr" and self.cfg.model.network.reinsert_type_token:
+                self.cfg.model.network.net.reinsert_s_channels = list(
+                    range(n_type_tokens)
+                )
 
     def init_data(self):
         print(
-            f"Working with dataset {self.cfg.data.dataset} "
+            f"Working with dataset {self.cfg.model.data.dataset} "
             f"and type_token={self.type_token}"
         )
 
         # load data
-        data_path = os.path.join(self.cfg.data.data_path, f"{self.dataset}.npy")
-        
+        data_path = os.path.join(self.cfg.model.data.data_path, f"{self.dataset}.npy")
+
         assert os.path.exists(data_path), f"data_path {data_path} does not exist"
         data_raw = np.load(data_path)
         mask_zeros = data_raw[:, -1] != 0
@@ -130,25 +130,33 @@ class AmplitudeExperiment:
         print(f"Loaded data with shape {data_raw.shape} from {data_path}")
 
         # bring data into correct shape
-        particles = data_raw[:, :4*len(TYPE_TOKEN_DICT[self.dataset])]
-        particles = particles.reshape(
-            particles.shape[0], particles.shape[1] // 4, 4
-        )
+        particles = data_raw[:, : 4 * len(TYPE_TOKEN_DICT[self.dataset])]
+        particles = particles.reshape(particles.shape[0], particles.shape[1] // 4, 4)
         amp_tree = data_raw[:, [-2]]
         amplitudes = data_raw[:, [-1]]
 
-        if self.cfg.data.kfac:
+        if self.cfg.model.data.kfac:
             amplitudes = amplitudes / amp_tree
 
-        if self.cfg.data.dataset == ['gggh']:
-            amplitudes_prepd = preprocess_amplitude_loop(amplitudes, self.cfg.data.prepd_mean, self.cfg.data.prepd_std)
+        if self.cfg.model.data.dataset == ["gggh"]:
+            amplitudes_prepd = preprocess_amplitude_loop(
+                amplitudes,
+                self.cfg.model.data.prepd_mean,
+                self.cfg.model.data.prepd_std,
+            )
         else:
             amplitudes_prepd = amplitudes
 
         if self.modelname == "MLP":
-            particles_prepd = preprocess_particles_mlp(particles, self.cfg.data.particles_prepd_mean, self.cfg.data.particles_prepd_std)
+            particles_prepd = preprocess_particles_mlp(
+                particles,
+                self.cfg.model.data.particles_prepd_mean,
+                self.cfg.model.data.particles_prepd_std,
+            )
         elif self.modelname == "GATr":
-            particles_prepd = preprocess_particles_gatr(particles, self.cfg.data.particles_prepd_std)
+            particles_prepd = preprocess_particles_gatr(
+                particles, self.cfg.model.data.particles_prepd_std
+            )
         else:
             raise ValueError(f"model {self.modelname} not implemented")
 
@@ -161,7 +169,12 @@ class AmplitudeExperiment:
 
     def _init_dataloader(self):
         self.loader = torch.utils.data.DataLoader(
-            dataset=AmplitudeDataset(self.particles_prepd, self.amplitudes_prepd, self.amp_tree, dtype=self.dtype),
+            dataset=AmplitudeDataset(
+                self.particles_prepd,
+                self.amplitudes_prepd,
+                self.amp_tree,
+                dtype=self.dtype,
+            ),
             batch_size=self.cfg.evaluation.batchsize,
             shuffle=False,
         )
@@ -195,44 +208,53 @@ class AmplitudeExperiment:
             amp_truth_prepd = np.concatenate(amp_truth_prepd)
             amp_sm = np.concatenate(amp_sm)
 
-            dt = (
-                (time.time() - t0)
-                * 1e6
-                / amp_truth_prepd.shape[0]
-            )
+            dt = (time.time() - t0) * 1e6 / amp_truth_prepd.shape[0]
             print(
                 f"Evaluation time: {dt:.2f}s for {amp_truth_prepd.shape[0]} events "
                 f"using batchsize {self.cfg.evaluation.batchsize}"
             )
 
             # undo preprocessing
-            if self.cfg.data.dataset == ['gggh']:
-                amp_truth = undo_preprocess_amplitude_gggh(amp_truth_prepd, self.cfg.data.prepd_mean, self.cfg.data.prepd_std)
-                amp_pred = undo_preprocess_amplitude_gggh(amp_pred_prepd, self.cfg.data.prepd_mean, self.cfg.data.prepd_std)
+            if self.cfg.model.data.dataset == ["gggh"]:
+                amp_truth = undo_preprocess_amplitude_gggh(
+                    amp_truth_prepd,
+                    self.cfg.model.data.prepd_mean,
+                    self.cfg.model.data.prepd_std,
+                )
+                amp_pred = undo_preprocess_amplitude_gggh(
+                    amp_pred_prepd,
+                    self.cfg.model.data.prepd_mean,
+                    self.cfg.model.data.prepd_std,
+                )
             else:
                 amp_truth = amp_truth_prepd
                 amp_pred = amp_pred_prepd
-            
-            if self.cfg.data.kfac:
-                amp_pred = amp_pred*amp_sm
-                amp_truth = amp_truth*amp_sm
+
+            if self.cfg.model.data.kfac:
+                amp_pred = amp_pred * amp_sm
+                amp_truth = amp_truth * amp_sm
 
             # compute metrics over actual amplitudes
             amp_pred_metric = amp_pred / amp_sm
             amp_true_metric = amp_truth / amp_sm
 
-            amp_pred_metric = amp_pred_metric[~np.isnan(amp_true_metric) & (amp_true_metric != 0)]
-            amp_true_metric = amp_true_metric[~np.isnan(amp_true_metric) & (amp_true_metric != 0)]
+            amp_pred_metric = amp_pred_metric[
+                ~np.isnan(amp_true_metric) & (amp_true_metric != 0)
+            ]
+            amp_true_metric = amp_true_metric[
+                ~np.isnan(amp_true_metric) & (amp_true_metric != 0)
+            ]
 
-            norm_1 = np.linalg.norm(amp_true_metric, 1)/len(amp_true_metric)
-            delta_norm_1 = np.linalg.norm(amp_pred_metric - amp_true_metric, 1)/len(amp_pred_metric)
-            rel_delta_norm_1 = delta_norm_1/norm_1
+            norm_1 = np.linalg.norm(amp_true_metric, 1) / len(amp_true_metric)
+            delta_norm_1 = np.linalg.norm(amp_pred_metric - amp_true_metric, 1) / len(
+                amp_pred_metric
+            )
+            rel_delta_norm_1 = delta_norm_1 / norm_1
 
             results = {
                 "truth": amp_truth,
                 "prediction": amp_pred,
                 "rel_delta_norm_1": rel_delta_norm_1,
             }
-            
-            print(results)
 
+            print(results)

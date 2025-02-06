@@ -1,0 +1,22 @@
+base_dir: /Users/victorbreso/interpolation_mine/GATr_tth
+run_idx: 0
+
+exp_name: amp
+exp_type: amplitudes
+
+enable_flash_sdp: false
+enable_math_sdp: true
+enable_mem_efficient_sdp: false
+
+evaluation:
+  batchsize: 1024
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+ 
+defaults:
+ - model: qq_tth_loop_gatr
+ - override hydra/hydra_logging: disabled
+ - override hydra/job_logging: disabled

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def inner_p(p1, p2):
     return np.log(
         p1[:, 0] * p2[:, 0]
@@ -20,12 +21,14 @@ def preprocess_particles_mlp(particles_raw, mean, std, eps_std=1e-2):
 
     for k in range(len(std)):
         if std[k] != 0:
-            p_single_array[:,k] = (p_single_array[:,k] - mean[k]) / std[k]
+            p_single_array[:, k] = (p_single_array[:, k] - mean[k]) / std[k]
 
     return p_single_array
-    
+
+
 def preprocess_particles_gatr(particles_raw, std, eps_std=1e-2):
     return particles_raw / std
+
 
 def preprocess_amplitude_gggh(amplitude, mean=None, std=None):
     log_amplitude = np.log(amplitude)
@@ -33,8 +36,9 @@ def preprocess_amplitude_gggh(amplitude, mean=None, std=None):
         mean = log_amplitude.mean()
         std = log_amplitude.std()
     prepd_amplitude = (log_amplitude - mean) / std
-    #assert np.isfinite(prepd_amplitude).all()
+    # assert np.isfinite(prepd_amplitude).all()
     return prepd_amplitude, mean, std
+
 
 def undo_preprocess_amplitude_gggh(prepd_amplitude, mean, std):
     assert mean is not None and std is not None
