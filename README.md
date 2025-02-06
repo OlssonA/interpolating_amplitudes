@@ -27,7 +27,7 @@ pip install -r ml/requirements.txt
 2. Specify the home directory in the `base_dir` field inside the `config/config.yaml` file.
 3. Run the command
 ```bash
-"python run.py model={process}_{model}"
+python run.py model={process}_{model}
 ``` 
 where the models are `gatr`, `mlp` and the processes are `qq_tth`, `qq_tth_loop`, `gg_tth`, `gg_tth_loop`, `gggh`.
 
