@@ -36,11 +36,10 @@ def preprocess_amplitude_gggh(amplitude, mean=None, std=None):
         mean = log_amplitude.mean()
         std = log_amplitude.std()
     prepd_amplitude = (log_amplitude - mean) / std
-    # assert np.isfinite(prepd_amplitude).all()
-    return prepd_amplitude, mean, std
+    return prepd_amplitude
 
 
 def undo_preprocess_amplitude_gggh(prepd_amplitude, mean, std):
     assert mean is not None and std is not None
     amplitude = prepd_amplitude * std + mean
-    return np.exp(prepd_amplitude)
+    return np.exp(amplitude)

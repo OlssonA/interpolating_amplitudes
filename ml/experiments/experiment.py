@@ -138,8 +138,8 @@ class AmplitudeExperiment:
         if self.cfg.model.data.kfac:
             amplitudes = amplitudes / amp_tree
 
-        if self.cfg.model.data.dataset == ["gggh"]:
-            amplitudes_prepd = preprocess_amplitude_loop(
+        if self.cfg.model.data.dataset == ["gggh_test"]:
+            amplitudes_prepd = preprocess_amplitude_gggh(
                 amplitudes,
                 self.cfg.model.data.prepd_mean,
                 self.cfg.model.data.prepd_std,
@@ -215,7 +215,7 @@ class AmplitudeExperiment:
             )
 
             # undo preprocessing
-            if self.cfg.model.data.dataset == ["gggh"]:
+            if self.cfg.model.data.dataset == ["gggh_test"]:
                 amp_truth = undo_preprocess_amplitude_gggh(
                     amp_truth_prepd,
                     self.cfg.model.data.prepd_mean,

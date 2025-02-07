@@ -67,20 +67,24 @@ def par2p(evaluation_point, mt2=1, mh2=12 / 23):
 
 
 if __name__ == "__main__":
-    
+
     def save(array, path):
         print(f"  {path} ({array.nbytes/1024**3:.2f} GB)")
         array.tofile(path)
 
     import scipy
     import sys
-    sys.path.append('../../')
+
+    sys.path.append("../../")
     import testfunctions
+
     f1_map = testfunctions.f1_map
     dim = 5
-    n_log2 = 10 # 2**n_log2 points
-    #Uniform points from a low-discrepancy sobol sequence
-    points = np.array(scipy.stats.qmc.Sobol(dim, scramble=True, bits=53).random_base2(n_log2))
+    n_log2 = 10  # 2**n_log2 points
+    # Uniform points from a low-discrepancy sobol sequence
+    points = np.array(
+        scipy.stats.qmc.Sobol(dim, scramble=True, bits=53).random_base2(n_log2)
+    )
     amps, weights = f1_map(points)
     amps = np.array(amps)
     amps.tofile("f1-amp.f64")
