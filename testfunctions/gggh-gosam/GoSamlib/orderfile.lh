@@ -1,0 +1,26 @@
+InterfaceVersion         BLHA2
+CorrectionType           QCD
+IRregularisation         CDR
+AlphaPower               1
+ResonanceTreatment       FixedWidthScheme
+EWRenormalisationScheme  alphaMZ
+AmplitudeType            LoopInduced
+MassiveParticles         6
+
+#
+# Massive top quark only amplitudes
+#
+ExcludedParticles        1 2 3 4 5
+# Born
+AlphasPower              3
+21 21 -> 21 25
+# Reals
+#AlphasPower             3
+#21 21 ->  23 23 21
+#1 21 ->  23 23  1
+#21  1 ->  23 23  1
+#-1 21 ->  23 23 -1
+#21 -1 ->  23 23 -1
+#1 -1 ->  23 23 21
+
+

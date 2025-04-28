@@ -1,0 +1,158 @@
+module     p0_ubaru_httbar_d65h5l1d_qp
+   ! file: /itp/swift/jannisl/fast/POWHEG-BOX-V2/ttH_for_samplecpp_updated/GoSa &
+   ! &m_POWHEG/Virtual/p0_ubaru_httbar/helicity5d65h5l1d_qp.f90
+   ! generator: buildfortran_d.py
+   use p0_ubaru_httbar_config, only: ki => ki_qp
+   use p0_ubaru_httbar_util_qp, only: cond, d => metric_tensor
+   implicit none
+   private
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+   integer, private :: iv0
+   integer, private :: iv1
+   integer, private :: iv2
+   real(ki), dimension(4), private :: qshift
+   public :: derivative
+contains
+!---#[ function brack_1:
+   pure function brack_1(Q, mu2) result(brack)
+      use p0_ubaru_httbar_model_qp
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_color_qp
+      use p0_ubaru_httbar_abbrevd65h5_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: Q
+      complex(ki), intent(in) :: mu2
+      complex(ki), dimension(12) :: acd65
+      complex(ki) :: brack
+      acd65(1)=dotproduct(qshift,spvak1k2)
+      acd65(2)=dotproduct(qshift,spval5l3)
+      acd65(3)=abb65(8)
+      acd65(4)=dotproduct(qshift,spval5l4)
+      acd65(5)=abb65(7)
+      acd65(6)=abb65(10)
+      acd65(7)=abb65(11)
+      acd65(8)=dotproduct(qshift,spval5k2)
+      acd65(9)=abb65(14)
+      acd65(10)=acd65(3)*acd65(1)
+      acd65(10)=-acd65(6)+acd65(10)
+      acd65(10)=acd65(2)*acd65(10)
+      acd65(11)=acd65(5)*acd65(1)
+      acd65(11)=-acd65(7)+acd65(11)
+      acd65(11)=acd65(4)*acd65(11)
+      acd65(12)=-acd65(9)*acd65(8)
+      brack=acd65(10)+acd65(11)+acd65(12)
+   end function brack_1
+!---#] function brack_1:
+!---#[ function brack_2:
+   pure function brack_2(Q, mu2) result(brack)
+      use p0_ubaru_httbar_model_qp
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_color_qp
+      use p0_ubaru_httbar_abbrevd65h5_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: Q
+      complex(ki), intent(in) :: mu2
+      complex(ki), dimension(16) :: acd65
+      complex(ki) :: brack
+      acd65(1)=spvak1k2(iv1)
+      acd65(2)=dotproduct(qshift,spval5l3)
+      acd65(3)=abb65(8)
+      acd65(4)=dotproduct(qshift,spval5l4)
+      acd65(5)=abb65(7)
+      acd65(6)=spval5l3(iv1)
+      acd65(7)=dotproduct(qshift,spvak1k2)
+      acd65(8)=abb65(10)
+      acd65(9)=spval5l4(iv1)
+      acd65(10)=abb65(11)
+      acd65(11)=spval5k2(iv1)
+      acd65(12)=abb65(14)
+      acd65(13)=acd65(2)*acd65(3)
+      acd65(14)=acd65(4)*acd65(5)
+      acd65(13)=acd65(14)+acd65(13)
+      acd65(13)=acd65(1)*acd65(13)
+      acd65(14)=acd65(7)*acd65(3)
+      acd65(14)=-acd65(8)+acd65(14)
+      acd65(14)=acd65(6)*acd65(14)
+      acd65(15)=acd65(7)*acd65(5)
+      acd65(15)=-acd65(10)+acd65(15)
+      acd65(15)=acd65(9)*acd65(15)
+      acd65(16)=-acd65(12)*acd65(11)
+      brack=acd65(13)+acd65(14)+acd65(15)+acd65(16)
+   end function brack_2
+!---#] function brack_2:
+!---#[ function brack_3:
+   pure function brack_3(Q, mu2) result(brack)
+      use p0_ubaru_httbar_model_qp
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_color_qp
+      use p0_ubaru_httbar_abbrevd65h5_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: Q
+      complex(ki), intent(in) :: mu2
+      complex(ki), dimension(11) :: acd65
+      complex(ki) :: brack
+      acd65(1)=spvak1k2(iv1)
+      acd65(2)=spval5l3(iv2)
+      acd65(3)=abb65(8)
+      acd65(4)=spval5l4(iv2)
+      acd65(5)=abb65(7)
+      acd65(6)=spvak1k2(iv2)
+      acd65(7)=spval5l3(iv1)
+      acd65(8)=spval5l4(iv1)
+      acd65(9)=acd65(2)*acd65(3)
+      acd65(10)=acd65(4)*acd65(5)
+      acd65(9)=acd65(9)+acd65(10)
+      acd65(9)=acd65(1)*acd65(9)
+      acd65(10)=acd65(7)*acd65(3)
+      acd65(11)=acd65(8)*acd65(5)
+      acd65(10)=acd65(11)+acd65(10)
+      acd65(10)=acd65(6)*acd65(10)
+      brack=acd65(9)+acd65(10)
+   end function brack_3
+!---#] function brack_3:
+!---#[ function derivative:
+   function derivative(mu2,i1,i2) result(numerator)
+      use p0_ubaru_httbar_globalsl1_qp, only: epspow
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_abbrevd65h5_qp
+      implicit none
+      complex(ki), intent(in) :: mu2
+      integer, intent(in), optional :: i1
+      integer, intent(in), optional :: i2
+      complex(ki) :: numerator
+      complex(ki) :: loc
+      integer :: t1
+      integer :: deg
+      complex(ki), dimension(4), parameter :: Q = (/ (0.0_ki,0.0_ki),(0.0_ki,0.&
+      &0_ki),(0.0_ki,0.0_ki),(0.0_ki,0.0_ki)/)
+      qshift = -k2
+      numerator = 0.0_ki
+      deg = 0
+      if(present(i1)) then
+          iv1=i1
+          deg=1
+      else
+          iv1=1
+      end if
+      if(present(i2)) then
+          iv2=i2
+          deg=2
+      else
+          iv2=1
+      end if
+      t1 = 0
+      if(deg.eq.0) then
+         numerator = cond(epspow.eq.t1,brack_1,Q,mu2)
+         return
+      end if
+      if(deg.eq.1) then
+         numerator = cond(epspow.eq.t1,brack_2,Q,mu2)
+         return
+      end if
+      if(deg.eq.2) then
+         numerator = cond(epspow.eq.t1,brack_3,Q,mu2)
+         return
+      end if
+   end function derivative
+!---#] function derivative:
+end module     p0_ubaru_httbar_d65h5l1d_qp

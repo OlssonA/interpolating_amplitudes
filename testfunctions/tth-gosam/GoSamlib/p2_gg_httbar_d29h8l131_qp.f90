@@ -1,0 +1,267 @@
+module     p2_gg_httbar_d29h8l131_qp
+   ! file: /itp/swift/jannisl/fast/POWHEG-BOX-V2/ttH_for_samplecpp_updated/GoSa &
+   ! &m_POWHEG/Virtual/p2_gg_httbar/helicity8d29h8l131_qp.f90
+   ! generator: buildfortran_tn3.py
+   use p2_gg_httbar_config, only: ki => ki_qp
+   use p2_gg_httbar_util_qp, only: cond_t, d => metric_tensor
+   implicit none
+   private
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+   integer, parameter :: ninjaidxt2mu0 = 0
+   integer, parameter :: ninjaidxt1mu0 = 1
+   integer, parameter :: ninjaidxt0mu0 = 2
+   integer, parameter :: ninjaidxt0mu2 = 3
+   public :: numerator_t3
+contains
+!---#[ subroutine brack_31:
+   pure subroutine brack_31(ninjaA, ninjaE3, ninjaE4, ninjaP, brack)
+      use p2_gg_httbar_model_qp
+      use p2_gg_httbar_kinematics_qp
+      use p2_gg_httbar_color_qp
+      use p2_gg_httbar_abbrevd29h8_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: ninjaA, ninjaE3, ninjaE4
+      complex(ki), intent(in) :: ninjaP
+      complex(ki), dimension(1) :: acd29
+      complex(ki), dimension (0:*), intent(inout) :: brack
+      brack(ninjaidxt2mu0)=0.0_ki
+   end subroutine brack_31
+!---#] subroutine brack_31:
+!---#[ subroutine brack_32:
+   pure subroutine brack_32(ninjaA, ninjaE3, ninjaE4, ninjaP, brack)
+      use p2_gg_httbar_model_qp
+      use p2_gg_httbar_kinematics_qp
+      use p2_gg_httbar_color_qp
+      use p2_gg_httbar_abbrevd29h8_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: ninjaA, ninjaE3, ninjaE4
+      complex(ki), intent(in) :: ninjaP
+      complex(ki), dimension(146) :: acd29
+      complex(ki), dimension (0:*), intent(inout) :: brack
+      acd29(1)=abb29(17)
+      acd29(2)=dotproduct(k2,ninjaE3)
+      acd29(3)=abb29(14)
+      acd29(4)=dotproduct(ninjaA,ninjaE3)
+      acd29(5)=dotproduct(ninjaE3,spvae2k2)
+      acd29(6)=abb29(11)
+      acd29(7)=dotproduct(ninjaE3,spvak2e1)
+      acd29(8)=abb29(12)
+      acd29(9)=dotproduct(ninjaE3,spvak2l3)
+      acd29(10)=abb29(15)
+      acd29(11)=dotproduct(ninjaE3,spval4k2)
+      acd29(12)=abb29(16)
+      acd29(13)=dotproduct(ninjaE3,spvak1l3)
+      acd29(14)=abb29(18)
+      acd29(15)=dotproduct(ninjaE3,spvak2e2)
+      acd29(16)=abb29(19)
+      acd29(17)=dotproduct(ninjaE3,spval3k2)
+      acd29(18)=abb29(20)
+      acd29(19)=dotproduct(ninjaE3,spval5l3)
+      acd29(20)=abb29(21)
+      acd29(21)=dotproduct(ninjaE3,spvae2e1)
+      acd29(22)=abb29(22)
+      acd29(23)=dotproduct(ninjaE3,spvae2k1)
+      acd29(24)=abb29(23)
+      acd29(25)=dotproduct(ninjaE3,spval5k2)
+      acd29(26)=abb29(24)
+      acd29(27)=dotproduct(ninjaE3,spvak2k1)
+      acd29(28)=abb29(25)
+      acd29(29)=dotproduct(ninjaE3,spvae2l5)
+      acd29(30)=abb29(26)
+      acd29(31)=dotproduct(ninjaE3,spval3k1)
+      acd29(32)=abb29(27)
+      acd29(33)=dotproduct(ninjaE3,spvak2l5)
+      acd29(34)=abb29(28)
+      acd29(35)=dotproduct(ninjaE3,spval4k1)
+      acd29(36)=abb29(29)
+      acd29(37)=dotproduct(ninjaE3,spval5e2)
+      acd29(38)=abb29(30)
+      acd29(39)=dotproduct(ninjaE3,spvae1l4)
+      acd29(40)=abb29(31)
+      acd29(41)=dotproduct(ninjaE3,spvak1e2)
+      acd29(42)=abb29(32)
+      acd29(43)=dotproduct(ninjaE3,spvak2l4)
+      acd29(44)=abb29(33)
+      acd29(45)=dotproduct(ninjaE3,spval5l4)
+      acd29(46)=abb29(34)
+      acd29(47)=dotproduct(ninjaE3,spval4e1)
+      acd29(48)=abb29(35)
+      acd29(49)=dotproduct(ninjaE3,spvak1l4)
+      acd29(50)=abb29(36)
+      acd29(51)=dotproduct(ninjaE3,spvak1k2)
+      acd29(52)=abb29(37)
+      acd29(53)=dotproduct(ninjaE3,spvae2l3)
+      acd29(54)=abb29(39)
+      acd29(55)=dotproduct(ninjaE3,spval3l5)
+      acd29(56)=abb29(40)
+      acd29(57)=dotproduct(ninjaE3,spval3e2)
+      acd29(58)=abb29(42)
+      acd29(59)=dotproduct(ninjaE3,spval4l5)
+      acd29(60)=abb29(43)
+      acd29(61)=dotproduct(ninjaE3,spval4l3)
+      acd29(62)=abb29(44)
+      acd29(63)=dotproduct(ninjaE3,spval3l4)
+      acd29(64)=abb29(45)
+      acd29(65)=dotproduct(ninjaE3,spvae1e2)
+      acd29(66)=abb29(52)
+      acd29(67)=dotproduct(ninjaE3,spvae1l3)
+      acd29(68)=abb29(57)
+      acd29(69)=dotproduct(ninjaE3,spvae1k2)
+      acd29(70)=abb29(72)
+      acd29(71)=dotproduct(ninjaE3,spval3e1)
+      acd29(72)=abb29(73)
+      acd29(73)=dotproduct(k2,ninjaA)
+      acd29(74)=dotproduct(ninjaA,ninjaA)
+      acd29(75)=dotproduct(ninjaA,spvae2k2)
+      acd29(76)=dotproduct(ninjaA,spvak2e1)
+      acd29(77)=dotproduct(ninjaA,spvak2l3)
+      acd29(78)=dotproduct(ninjaA,spval4k2)
+      acd29(79)=dotproduct(ninjaA,spvak1l3)
+      acd29(80)=dotproduct(ninjaA,spvak2e2)
+      acd29(81)=dotproduct(ninjaA,spval3k2)
+      acd29(82)=dotproduct(ninjaA,spval5l3)
+      acd29(83)=dotproduct(ninjaA,spvae2e1)
+      acd29(84)=dotproduct(ninjaA,spvae2k1)
+      acd29(85)=dotproduct(ninjaA,spval5k2)
+      acd29(86)=dotproduct(ninjaA,spvak2k1)
+      acd29(87)=dotproduct(ninjaA,spvae2l5)
+      acd29(88)=dotproduct(ninjaA,spval3k1)
+      acd29(89)=dotproduct(ninjaA,spvak2l5)
+      acd29(90)=dotproduct(ninjaA,spval4k1)
+      acd29(91)=dotproduct(ninjaA,spval5e2)
+      acd29(92)=dotproduct(ninjaA,spvae1l4)
+      acd29(93)=dotproduct(ninjaA,spvak1e2)
+      acd29(94)=dotproduct(ninjaA,spvak2l4)
+      acd29(95)=dotproduct(ninjaA,spval5l4)
+      acd29(96)=dotproduct(ninjaA,spval4e1)
+      acd29(97)=dotproduct(ninjaA,spvak1l4)
+      acd29(98)=dotproduct(ninjaA,spvak1k2)
+      acd29(99)=dotproduct(ninjaA,spvae2l3)
+      acd29(100)=dotproduct(ninjaA,spval3l5)
+      acd29(101)=dotproduct(ninjaA,spval3e2)
+      acd29(102)=dotproduct(ninjaA,spval4l5)
+      acd29(103)=dotproduct(ninjaA,spval4l3)
+      acd29(104)=dotproduct(ninjaA,spval3l4)
+      acd29(105)=dotproduct(ninjaA,spvae1e2)
+      acd29(106)=dotproduct(ninjaA,spvae1l3)
+      acd29(107)=dotproduct(ninjaA,spvae1k2)
+      acd29(108)=dotproduct(ninjaA,spval3e1)
+      acd29(109)=abb29(13)
+      acd29(110)=acd29(2)*acd29(3)
+      acd29(111)=acd29(4)*acd29(1)
+      acd29(112)=acd29(5)*acd29(6)
+      acd29(113)=acd29(7)*acd29(8)
+      acd29(114)=acd29(9)*acd29(10)
+      acd29(115)=acd29(11)*acd29(12)
+      acd29(116)=acd29(13)*acd29(14)
+      acd29(117)=acd29(15)*acd29(16)
+      acd29(118)=acd29(17)*acd29(18)
+      acd29(119)=acd29(19)*acd29(20)
+      acd29(120)=acd29(21)*acd29(22)
+      acd29(121)=acd29(23)*acd29(24)
+      acd29(122)=acd29(25)*acd29(26)
+      acd29(123)=acd29(27)*acd29(28)
+      acd29(124)=acd29(29)*acd29(30)
+      acd29(125)=acd29(31)*acd29(32)
+      acd29(126)=acd29(33)*acd29(34)
+      acd29(127)=acd29(35)*acd29(36)
+      acd29(128)=acd29(37)*acd29(38)
+      acd29(129)=acd29(39)*acd29(40)
+      acd29(130)=acd29(41)*acd29(42)
+      acd29(131)=acd29(43)*acd29(44)
+      acd29(132)=acd29(45)*acd29(46)
+      acd29(133)=acd29(47)*acd29(48)
+      acd29(134)=acd29(49)*acd29(50)
+      acd29(135)=acd29(51)*acd29(52)
+      acd29(136)=acd29(53)*acd29(54)
+      acd29(137)=acd29(55)*acd29(56)
+      acd29(138)=acd29(57)*acd29(58)
+      acd29(139)=acd29(59)*acd29(60)
+      acd29(140)=acd29(61)*acd29(62)
+      acd29(141)=acd29(63)*acd29(64)
+      acd29(142)=acd29(65)*acd29(66)
+      acd29(143)=-acd29(67)*acd29(68)
+      acd29(144)=-acd29(69)*acd29(70)
+      acd29(145)=acd29(71)*acd29(72)
+      acd29(110)=acd29(145)+acd29(144)+acd29(143)+acd29(142)+acd29(141)+acd29(1&
+      &40)+acd29(139)+acd29(138)+acd29(137)+acd29(136)+acd29(135)+acd29(134)+ac&
+      &d29(133)+acd29(132)+acd29(131)+acd29(130)+acd29(129)+acd29(128)+acd29(12&
+      &7)+acd29(126)+acd29(125)+acd29(124)+acd29(123)+acd29(122)+acd29(121)+acd&
+      &29(120)+acd29(119)+acd29(118)+acd29(117)+acd29(116)+acd29(115)+acd29(114&
+      &)+acd29(113)+acd29(112)+acd29(110)+2.0_ki*acd29(111)
+      acd29(111)=ninjaP+acd29(74)
+      acd29(111)=acd29(1)*acd29(111)
+      acd29(112)=acd29(73)*acd29(3)
+      acd29(113)=acd29(75)*acd29(6)
+      acd29(114)=acd29(76)*acd29(8)
+      acd29(115)=acd29(77)*acd29(10)
+      acd29(116)=acd29(78)*acd29(12)
+      acd29(117)=acd29(79)*acd29(14)
+      acd29(118)=acd29(80)*acd29(16)
+      acd29(119)=acd29(81)*acd29(18)
+      acd29(120)=acd29(82)*acd29(20)
+      acd29(121)=acd29(83)*acd29(22)
+      acd29(122)=acd29(84)*acd29(24)
+      acd29(123)=acd29(85)*acd29(26)
+      acd29(124)=acd29(86)*acd29(28)
+      acd29(125)=acd29(87)*acd29(30)
+      acd29(126)=acd29(88)*acd29(32)
+      acd29(127)=acd29(89)*acd29(34)
+      acd29(128)=acd29(90)*acd29(36)
+      acd29(129)=acd29(91)*acd29(38)
+      acd29(130)=acd29(92)*acd29(40)
+      acd29(131)=acd29(93)*acd29(42)
+      acd29(132)=acd29(94)*acd29(44)
+      acd29(133)=acd29(95)*acd29(46)
+      acd29(134)=acd29(96)*acd29(48)
+      acd29(135)=acd29(97)*acd29(50)
+      acd29(136)=acd29(98)*acd29(52)
+      acd29(137)=acd29(99)*acd29(54)
+      acd29(138)=acd29(100)*acd29(56)
+      acd29(139)=acd29(101)*acd29(58)
+      acd29(140)=acd29(102)*acd29(60)
+      acd29(141)=acd29(103)*acd29(62)
+      acd29(142)=acd29(104)*acd29(64)
+      acd29(143)=acd29(105)*acd29(66)
+      acd29(144)=-acd29(106)*acd29(68)
+      acd29(145)=-acd29(107)*acd29(70)
+      acd29(146)=acd29(108)*acd29(72)
+      acd29(111)=acd29(109)+acd29(146)+acd29(145)+acd29(144)+acd29(143)+acd29(1&
+      &42)+acd29(141)+acd29(140)+acd29(139)+acd29(138)+acd29(137)+acd29(136)+ac&
+      &d29(135)+acd29(134)+acd29(133)+acd29(132)+acd29(131)+acd29(130)+acd29(12&
+      &9)+acd29(128)+acd29(127)+acd29(126)+acd29(125)+acd29(124)+acd29(123)+acd&
+      &29(122)+acd29(121)+acd29(120)+acd29(119)+acd29(118)+acd29(117)+acd29(116&
+      &)+acd29(115)+acd29(114)+acd29(113)+acd29(112)+acd29(111)
+      brack(ninjaidxt1mu0)=acd29(110)
+      brack(ninjaidxt0mu0)=acd29(111)
+      brack(ninjaidxt0mu2)=acd29(1)
+   end subroutine brack_32
+!---#] subroutine brack_32:
+!---#[ subroutine numerator_t3:
+   subroutine numerator_t3(ncut, a, b, c, param, deg, coeffs) &
+   & bind(c, name="p2_gg_httbar_d29h8_qp_ninja_t3")
+      use iso_c_binding, only: c_int
+      use quadninjago_module, only: ki => ki_nin
+      use p2_gg_httbar_globalsl1_qp, only: epspow
+      use p2_gg_httbar_kinematics_qp
+      use p2_gg_httbar_abbrevd29h8_qp
+      implicit none
+      integer(c_int), intent(in) :: ncut, deg
+      complex(ki), dimension(0:3), intent(in) :: a, b, c
+      complex(ki), intent(in) :: param
+      complex(ki), dimension(4) :: vecA, vecB, vecC
+      complex(ki), dimension(0:*), intent(out) :: coeffs
+      integer :: t1
+      complex(ki), dimension(4) :: qshift
+      qshift = k3+k4
+      vecA(1:4) = + a(0:3) - qshift(1:4)
+      vecB(1:4) = + b(0:3)
+      vecC(1:4) = + c(0:3)
+      if (deg.lt.0) return
+      t1 = 0
+      call cond_t(epspow.eq.t1,brack_31,vecA,vecB,vecC,param,coeffs)
+      if (deg.le.(1+(-1))) return
+      call cond_t(epspow.eq.t1,brack_32,vecA,vecB,vecC,param,coeffs)
+   end subroutine numerator_t3
+!---#] subroutine numerator_t3:
+end module     p2_gg_httbar_d29h8l131_qp

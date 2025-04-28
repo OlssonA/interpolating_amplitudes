@@ -1,0 +1,178 @@
+module     p2_gg_httbar_d113h0l1
+   ! file: /itp/swift/jannisl/fast/POWHEG-BOX-V2/ttH_for_samplecpp_updated/GoSa &
+   ! &m_POWHEG/Virtual/p2_gg_httbar/helicity0d113h0l1.f90
+   ! generator: buildfortran.py
+   use p2_gg_httbar_config, only: ki
+   use p2_gg_httbar_util, only: cond
+   implicit none
+   private
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+   public :: numerator_ninja
+contains
+!---#[ function brack_1:
+   pure function brack_1(Q,mu2) result(brack)
+      use p2_gg_httbar_model
+      use p2_gg_httbar_kinematics
+      use p2_gg_httbar_color
+      use p2_gg_httbar_abbrevd113h0
+      implicit none
+      complex(ki), dimension(4), intent(in) :: Q
+      complex(ki), intent(in) :: mu2
+      complex(ki) :: brack
+      complex(ki) :: acc113(55)
+      complex(ki) :: Qspval4k2
+      complex(ki) :: Qspval5k2
+      complex(ki) :: Qspvae2l3
+      complex(ki) :: Qspvae2k2
+      complex(ki) :: QspQ
+      complex(ki) :: Qspval4e1
+      complex(ki) :: Qspval5e1
+      complex(ki) :: Qspvae1e2
+      complex(ki) :: Qspval4e2
+      complex(ki) :: Qspval5e2
+      complex(ki) :: Qspvae1k2
+      complex(ki) :: Qspk2
+      complex(ki) :: Qspval3e2
+      complex(ki) :: Qspvae2e1
+      Qspval4k2 = dotproduct(Q,spval4k2)
+      Qspval5k2 = dotproduct(Q,spval5k2)
+      Qspvae2l3 = dotproduct(Q,spvae2l3)
+      Qspvae2k2 = dotproduct(Q,spvae2k2)
+      QspQ = dotproduct(Q,Q)
+      Qspval4e1 = dotproduct(Q,spval4e1)
+      Qspval5e1 = dotproduct(Q,spval5e1)
+      Qspvae1e2 = dotproduct(Q,spvae1e2)
+      Qspval4e2 = dotproduct(Q,spval4e2)
+      Qspval5e2 = dotproduct(Q,spval5e2)
+      Qspvae1k2 = dotproduct(Q,spvae1k2)
+      Qspk2 = dotproduct(Q,k2)
+      Qspval3e2 = dotproduct(Q,spval3e2)
+      Qspvae2e1 = dotproduct(Q,spvae2e1)
+      acc113(1)=abb113(7)
+      acc113(2)=abb113(8)
+      acc113(3)=abb113(9)
+      acc113(4)=abb113(10)
+      acc113(5)=abb113(11)
+      acc113(6)=abb113(12)
+      acc113(7)=abb113(13)
+      acc113(8)=abb113(14)
+      acc113(9)=abb113(15)
+      acc113(10)=abb113(16)
+      acc113(11)=abb113(17)
+      acc113(12)=abb113(18)
+      acc113(13)=abb113(19)
+      acc113(14)=abb113(20)
+      acc113(15)=abb113(21)
+      acc113(16)=abb113(22)
+      acc113(17)=abb113(23)
+      acc113(18)=abb113(24)
+      acc113(19)=abb113(25)
+      acc113(20)=abb113(26)
+      acc113(21)=abb113(27)
+      acc113(22)=abb113(28)
+      acc113(23)=abb113(29)
+      acc113(24)=abb113(30)
+      acc113(25)=abb113(31)
+      acc113(26)=abb113(32)
+      acc113(27)=abb113(33)
+      acc113(28)=abb113(34)
+      acc113(29)=abb113(35)
+      acc113(30)=abb113(37)
+      acc113(31)=abb113(38)
+      acc113(32)=abb113(39)
+      acc113(33)=abb113(42)
+      acc113(34)=abb113(43)
+      acc113(35)=abb113(44)
+      acc113(36)=abb113(45)
+      acc113(37)=abb113(46)
+      acc113(38)=abb113(47)
+      acc113(39)=abb113(48)
+      acc113(40)=abb113(49)
+      acc113(41)=abb113(50)
+      acc113(42)=Qspval4k2*acc113(29)
+      acc113(43)=Qspval5k2*acc113(12)
+      acc113(44)=Qspvae2l3*acc113(41)
+      acc113(45)=Qspvae2k2*acc113(15)
+      acc113(46)=QspQ*acc113(14)
+      acc113(47)=-Qspvae2k2*acc113(38)
+      acc113(47)=acc113(40)+acc113(47)
+      acc113(47)=Qspval4e1*acc113(47)
+      acc113(48)=-Qspvae2k2*acc113(33)
+      acc113(48)=acc113(37)+acc113(48)
+      acc113(48)=Qspval5e1*acc113(48)
+      acc113(42)=acc113(48)+acc113(47)+acc113(46)+acc113(45)+acc113(44)+acc113(&
+      &43)+acc113(6)+acc113(42)
+      acc113(42)=Qspvae1e2*acc113(42)
+      acc113(43)=-Qspval4e2*acc113(38)
+      acc113(44)=-Qspval5e2*acc113(33)
+      acc113(43)=acc113(44)+acc113(16)+acc113(43)
+      acc113(43)=Qspvae1k2*acc113(43)
+      acc113(44)=Qspval4e2*acc113(9)
+      acc113(45)=Qspval5e2*acc113(34)
+      acc113(46)=Qspk2*acc113(30)
+      acc113(47)=Qspval3e2*acc113(24)
+      acc113(48)=-QspQ*acc113(27)
+      acc113(43)=acc113(43)+acc113(48)+acc113(47)+acc113(46)+acc113(45)+acc113(&
+      &21)+acc113(44)
+      acc113(43)=Qspvae2e1*acc113(43)
+      acc113(44)=Qspval4k2*acc113(4)
+      acc113(45)=Qspval5k2*acc113(3)
+      acc113(46)=Qspvae2l3*acc113(26)
+      acc113(47)=Qspvae2k2*acc113(28)
+      acc113(48)=QspQ*acc113(31)
+      acc113(44)=acc113(48)+acc113(47)+acc113(46)+acc113(45)+acc113(8)+acc113(4&
+      &4)
+      acc113(44)=Qspvae1k2*acc113(44)
+      acc113(45)=Qspk2*acc113(39)
+      acc113(46)=Qspval3e2*acc113(5)
+      acc113(47)=QspQ*acc113(17)
+      acc113(45)=acc113(47)+acc113(46)+acc113(1)+acc113(45)
+      acc113(45)=Qspval4e1*acc113(45)
+      acc113(46)=Qspk2*acc113(35)
+      acc113(47)=Qspval3e2*acc113(7)
+      acc113(48)=QspQ*acc113(36)
+      acc113(46)=acc113(48)+acc113(47)+acc113(2)+acc113(46)
+      acc113(46)=Qspval5e1*acc113(46)
+      acc113(47)=Qspval4k2*acc113(25)
+      acc113(48)=Qspval5k2*acc113(23)
+      acc113(49)=Qspvae2l3*acc113(10)
+      acc113(50)=Qspval4e2*acc113(20)
+      acc113(51)=Qspval5e2*acc113(18)
+      acc113(52)=Qspk2*acc113(19)
+      acc113(53)=Qspval3e2*acc113(32)
+      acc113(54)=Qspvae2k2*acc113(22)
+      acc113(55)=QspQ*acc113(13)
+      brack=acc113(11)+acc113(42)+acc113(43)+acc113(44)+acc113(45)+acc113(46)+a&
+      &cc113(47)+acc113(48)+acc113(49)+acc113(50)+acc113(51)+acc113(52)+acc113(&
+      &53)+acc113(54)+acc113(55)
+   end  function brack_1
+!---#] function brack_1:
+!---#[ numerator interfaces:
+   !------#[ subroutine numerator_ninja:
+   subroutine numerator_ninja(ncut, Q_ext, mu2_ext, numerator) &
+   & bind(c, name="p2_gg_httbar_d113h0l1_ninja")
+      use iso_c_binding, only: c_int
+      use ninjago_module, only: ki_nin
+      use p2_gg_httbar_globalsl1, only: epspow
+      use p2_gg_httbar_kinematics
+      use p2_gg_httbar_abbrevd113h0
+      implicit none
+      integer(c_int), intent(in) :: ncut
+      complex(ki_nin), dimension(0:3), intent(in) :: Q_ext
+      complex(ki_nin), intent(in) :: mu2_ext
+      complex(ki_nin), intent(out) :: numerator
+      complex(ki) :: d113
+      ! The Q that goes into the diagram
+      complex(ki), dimension(4) :: Q
+      complex(ki) :: mu2
+      real(ki), dimension(0:3) :: qshift
+      qshift = -k2+k3+k5
+      Q(1:4)  =cmplx(real(-Q_ext(0:3)  -qshift(:),  ki_nin), aimag(-Q_ext(0:3))&
+      &, ki)
+      d113 = 0.0_ki
+      d113 = (cond(epspow.eq.0,brack_1,Q,mu2))
+      numerator = cmplx(real(d113, ki), aimag(d113), ki_nin)
+   end subroutine numerator_ninja
+   !------#] subroutine numerator_ninja:
+!---#] numerator interfaces:
+end module p2_gg_httbar_d113h0l1

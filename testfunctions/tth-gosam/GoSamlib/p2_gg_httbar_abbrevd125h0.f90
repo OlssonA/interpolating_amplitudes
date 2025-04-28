@@ -1,0 +1,250 @@
+module     p2_gg_httbar_abbrevd125h0
+   use p2_gg_httbar_config, only: ki
+   use p2_gg_httbar_kinematics, only: epstensor
+   use p2_gg_httbar_globalsh0
+   implicit none
+   private
+   complex(ki), dimension(55), public :: abb125
+   complex(ki), public :: R2d125
+   public :: init_abbrev
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+contains
+   subroutine     init_abbrev()
+      use p2_gg_httbar_config, only: deltaOS, &
+     &    logfile, debug_nlo_diagrams
+      use p2_gg_httbar_kinematics
+      use p2_gg_httbar_model
+      use p2_gg_httbar_color, only: TR
+      use p2_gg_httbar_globalsl1, only: epspow
+      implicit none
+      abb125(1)=sqrt(mT**2)
+      abb125(2)=es45**(-1)
+      abb125(3)=spak2l3**(-1)
+      abb125(4)=spbl4k2**(-1)
+      abb125(5)=spbl5k2**(-1)
+      abb125(6)=spbl3k2**(-1)
+      abb125(7)=c1-c2
+      abb125(8)=gs**4*i_*TR*mT*e*gHT*abb125(2)
+      abb125(9)=abb125(7)*abb125(8)*abb125(1)
+      abb125(10)=-abb125(4)*abb125(9)
+      abb125(11)=abb125(10)*spae2l3
+      abb125(12)=abb125(3)*mH**2
+      abb125(13)=abb125(12)*spbk2e2
+      abb125(14)=abb125(13)*abb125(6)
+      abb125(15)=abb125(11)*abb125(14)
+      abb125(16)=spae2l3*spbk2e2
+      abb125(17)=abb125(16)*abb125(10)
+      abb125(15)=abb125(15)-abb125(17)
+      abb125(18)=spbk2k1*spae1k1
+      abb125(19)=abb125(18)*spbl3e1
+      abb125(20)=-abb125(15)*abb125(19)
+      abb125(7)=abb125(8)*abb125(7)*abb125(1)**3
+      abb125(8)=-abb125(4)*abb125(7)
+      abb125(21)=abb125(14)-spbk2e2
+      abb125(21)=abb125(21)*spae1e2
+      abb125(22)=abb125(8)*spbk2e1*abb125(21)
+      abb125(20)=abb125(22)+abb125(20)
+      abb125(20)=spak2l5*abb125(20)
+      abb125(9)=-abb125(5)*abb125(9)
+      abb125(22)=abb125(9)*spae2l3
+      abb125(23)=abb125(22)*abb125(14)
+      abb125(24)=abb125(16)*abb125(9)
+      abb125(23)=abb125(23)-abb125(24)
+      abb125(25)=-abb125(23)*abb125(19)
+      abb125(7)=-abb125(5)*abb125(7)
+      abb125(26)=abb125(7)*spbk2e1
+      abb125(21)=abb125(26)*abb125(21)
+      abb125(21)=abb125(21)+abb125(25)
+      abb125(21)=spak2l4*abb125(21)
+      abb125(16)=abb125(16)*spbl3e1
+      abb125(25)=-abb125(8)*abb125(16)
+      abb125(27)=abb125(8)*spbe2e1
+      abb125(28)=spbl3k2*spae2l3
+      abb125(29)=-abb125(28)*abb125(27)
+      abb125(25)=abb125(25)+abb125(29)
+      abb125(25)=spae1l5*abb125(25)
+      abb125(16)=-abb125(7)*abb125(16)
+      abb125(29)=abb125(7)*spbe2e1
+      abb125(28)=-abb125(28)*abb125(29)
+      abb125(16)=abb125(16)+abb125(28)
+      abb125(16)=spae1l4*abb125(16)
+      abb125(26)=abb125(26)*spae2l4
+      abb125(28)=abb125(8)*spae2l5
+      abb125(30)=abb125(28)*spbk2e1
+      abb125(26)=abb125(26)+abb125(30)
+      abb125(30)=spae1l3*spbl3e2
+      abb125(31)=-abb125(26)*abb125(30)
+      abb125(32)=spae1e2*spbk2e2
+      abb125(33)=abb125(32)*abb125(8)
+      abb125(34)=abb125(11)*spbl3k2
+      abb125(35)=abb125(30)*abb125(34)
+      abb125(33)=abb125(33)-abb125(35)
+      abb125(35)=spak1l5*spbk1e1
+      abb125(36)=-abb125(33)*abb125(35)
+      abb125(37)=abb125(32)*abb125(7)
+      abb125(38)=abb125(22)*spbl3k2
+      abb125(30)=abb125(30)*abb125(38)
+      abb125(30)=abb125(37)-abb125(30)
+      abb125(37)=spak1l4*spbk1e1
+      abb125(39)=-abb125(30)*abb125(37)
+      abb125(40)=abb125(11)*abb125(13)
+      abb125(41)=abb125(35)*abb125(40)
+      abb125(13)=abb125(22)*abb125(13)
+      abb125(42)=abb125(37)*abb125(13)
+      abb125(41)=abb125(41)+abb125(42)
+      abb125(41)=spae1k2*abb125(41)
+      abb125(42)=spae1e2*spbk2e1
+      abb125(43)=abb125(42)*abb125(8)
+      abb125(44)=spbl3e2*abb125(43)
+      abb125(45)=abb125(11)*spbl3e2
+      abb125(46)=-abb125(45)*abb125(19)
+      abb125(44)=abb125(44)+abb125(46)
+      abb125(44)=spal3l5*abb125(44)
+      abb125(46)=abb125(42)*abb125(7)
+      abb125(47)=spbl3e2*abb125(46)
+      abb125(48)=abb125(22)*spbl3e2
+      abb125(49)=-abb125(48)*abb125(19)
+      abb125(47)=abb125(47)+abb125(49)
+      abb125(47)=spal3l4*abb125(47)
+      abb125(49)=abb125(9)*spbl3e2
+      abb125(50)=abb125(49)*spal3l4
+      abb125(51)=abb125(10)*spbl3e2
+      abb125(52)=abb125(51)*spal3l5
+      abb125(50)=abb125(50)+abb125(52)
+      abb125(12)=spae2k2*spbk2e1*abb125(18)*abb125(12)*abb125(6)
+      abb125(52)=-abb125(50)*abb125(12)
+      abb125(28)=abb125(28)*spbe2e1
+      abb125(53)=-abb125(18)*abb125(28)
+      abb125(54)=abb125(18)*spae2l4
+      abb125(55)=-abb125(29)*abb125(54)
+      abb125(16)=abb125(52)+abb125(47)+abb125(44)+abb125(41)+abb125(39)+abb125(&
+      &36)+abb125(31)+abb125(16)+abb125(25)+abb125(55)+abb125(53)+abb125(20)+ab&
+      &b125(21)
+      abb125(20)=abb125(10)*spbk2e2
+      abb125(21)=abb125(14)*abb125(10)
+      abb125(20)=abb125(20)-abb125(21)
+      abb125(20)=abb125(20)*spak2l5
+      abb125(25)=abb125(9)*spbk2e2
+      abb125(14)=abb125(14)*abb125(9)
+      abb125(25)=abb125(25)-abb125(14)
+      abb125(25)=abb125(25)*spak2l4
+      abb125(20)=abb125(20)+abb125(25)
+      abb125(25)=-spae1e2*spbk2e1*abb125(20)
+      abb125(31)=abb125(34)*spae1l5
+      abb125(36)=abb125(38)*spae1l4
+      abb125(31)=abb125(31)+abb125(36)
+      abb125(36)=abb125(18)*spae2l5
+      abb125(39)=-abb125(10)*abb125(36)
+      abb125(41)=-abb125(9)*abb125(54)
+      abb125(39)=abb125(41)+abb125(39)-abb125(31)
+      abb125(39)=spbe2e1*abb125(39)
+      abb125(41)=abb125(42)*abb125(50)
+      abb125(44)=abb125(37)*abb125(9)
+      abb125(47)=abb125(35)*abb125(10)
+      abb125(44)=abb125(44)+abb125(47)
+      abb125(47)=-abb125(32)*abb125(44)
+      abb125(25)=abb125(39)+abb125(47)+abb125(41)+abb125(25)
+      abb125(20)=-abb125(50)+abb125(20)
+      abb125(39)=abb125(18)*abb125(20)
+      abb125(8)=-spae1l5*abb125(8)
+      abb125(7)=-spae1l4*abb125(7)
+      abb125(7)=abb125(7)+abb125(8)
+      abb125(7)=spbk2e2*abb125(7)
+      abb125(7)=abb125(39)+abb125(7)
+      abb125(7)=2.0_ki*abb125(7)
+      abb125(8)=abb125(35)*abb125(34)
+      abb125(39)=abb125(37)*abb125(38)
+      abb125(8)=abb125(39)+abb125(8)-abb125(26)
+      abb125(8)=2.0_ki*abb125(8)
+      abb125(26)=abb125(10)*abb125(12)
+      abb125(39)=abb125(11)*abb125(19)
+      abb125(26)=abb125(26)-abb125(43)+abb125(39)
+      abb125(39)=-abb125(10)*abb125(42)
+      abb125(41)=2.0_ki*abb125(10)
+      abb125(43)=abb125(18)*abb125(41)
+      abb125(47)=-spae1k2*abb125(40)
+      abb125(33)=abb125(47)+abb125(33)
+      abb125(47)=abb125(10)*abb125(32)
+      abb125(34)=-2.0_ki*abb125(34)
+      abb125(12)=abb125(9)*abb125(12)
+      abb125(19)=abb125(22)*abb125(19)
+      abb125(12)=abb125(12)-abb125(46)+abb125(19)
+      abb125(19)=-abb125(9)*abb125(42)
+      abb125(42)=2.0_ki*abb125(9)
+      abb125(18)=abb125(18)*abb125(42)
+      abb125(46)=-spae1k2*abb125(13)
+      abb125(30)=abb125(46)+abb125(30)
+      abb125(32)=abb125(9)*abb125(32)
+      abb125(38)=-2.0_ki*abb125(38)
+      abb125(23)=abb125(23)*spak2l4
+      abb125(15)=abb125(15)*spak2l5
+      abb125(45)=abb125(45)*spal3l5
+      abb125(46)=abb125(48)*spal3l4
+      abb125(15)=abb125(45)+abb125(46)+abb125(23)+abb125(15)
+      abb125(23)=-spbk2e1*abb125(15)
+      abb125(45)=abb125(35)*abb125(17)
+      abb125(46)=abb125(37)*abb125(24)
+      abb125(23)=abb125(46)+abb125(45)+abb125(23)
+      abb125(45)=spbk2e1*abb125(11)
+      abb125(46)=spbk2e1*abb125(22)
+      abb125(31)=spbl3e2*abb125(31)
+      abb125(48)=abb125(51)*abb125(36)
+      abb125(50)=abb125(49)*abb125(54)
+      abb125(31)=abb125(48)+abb125(50)+abb125(31)
+      abb125(48)=abb125(51)*abb125(35)
+      abb125(50)=abb125(49)*abb125(37)
+      abb125(48)=abb125(50)+abb125(48)
+      abb125(48)=spae1l3*abb125(48)
+      abb125(35)=abb125(21)*abb125(35)
+      abb125(37)=abb125(14)*abb125(37)
+      abb125(35)=abb125(35)+abb125(37)
+      abb125(35)=spae1k2*abb125(35)
+      abb125(27)=-spae1l5*abb125(27)
+      abb125(37)=-spae1l4*abb125(29)
+      abb125(27)=abb125(35)+abb125(27)+abb125(37)+abb125(48)
+      abb125(35)=-spae1l5*abb125(10)
+      abb125(37)=-spae1l4*abb125(9)
+      abb125(35)=abb125(35)+abb125(37)
+      abb125(35)=spbe2e1*abb125(35)
+      abb125(37)=2.0_ki*abb125(44)
+      abb125(44)=-spae1l3*abb125(51)
+      abb125(48)=-spae1k2*abb125(21)
+      abb125(44)=abb125(44)+abb125(48)
+      abb125(48)=-spae1l3*abb125(49)
+      abb125(50)=-spae1k2*abb125(14)
+      abb125(48)=abb125(48)+abb125(50)
+      abb125(50)=spae1l5*abb125(51)
+      abb125(52)=spae1l4*abb125(49)
+      abb125(50)=abb125(50)+abb125(52)
+      abb125(15)=spbl3e1*abb125(15)
+      abb125(29)=spae2l4*abb125(29)
+      abb125(15)=abb125(29)+abb125(28)+abb125(15)
+      abb125(10)=spae2l5*abb125(10)
+      abb125(9)=spae2l4*abb125(9)
+      abb125(9)=abb125(10)+abb125(9)
+      abb125(9)=spbe2e1*abb125(9)
+      abb125(10)=-2.0_ki*abb125(20)
+      abb125(11)=-spbl3e1*abb125(11)
+      abb125(20)=-spbl3e1*abb125(22)
+      abb125(22)=-spae2l5*abb125(51)
+      abb125(28)=-spae2l4*abb125(49)
+      abb125(22)=abb125(22)+abb125(28)
+      abb125(28)=abb125(21)*abb125(36)
+      abb125(29)=abb125(14)*abb125(54)
+      abb125(36)=spae1l5*abb125(40)
+      abb125(13)=spae1l4*abb125(13)
+      abb125(13)=abb125(13)+abb125(36)+abb125(28)+abb125(29)
+      abb125(28)=spae1l5*abb125(21)
+      abb125(29)=spae1l4*abb125(14)
+      abb125(28)=abb125(28)+abb125(29)
+      abb125(21)=-spae2l5*abb125(21)
+      abb125(14)=-spae2l4*abb125(14)
+      abb125(14)=abb125(21)+abb125(14)
+      R2d125=0.0_ki
+      rat2 = rat2 + R2d125
+      if (debug_nlo_diagrams) then
+          write (logfile,*) "<result name='r2' index='125' value='", &
+          & R2d125, "'/>"
+      end if
+   end subroutine
+end module p2_gg_httbar_abbrevd125h0

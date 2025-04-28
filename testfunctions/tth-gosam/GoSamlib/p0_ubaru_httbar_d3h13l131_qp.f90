@@ -1,0 +1,154 @@
+module     p0_ubaru_httbar_d3h13l131_qp
+   ! file: /itp/swift/jannisl/fast/POWHEG-BOX-V2/ttH_for_samplecpp_updated/GoSa &
+   ! &m_POWHEG/Virtual/p0_ubaru_httbar/helicity13d3h13l131_qp.f90
+   ! generator: buildfortran_tn3.py
+   use p0_ubaru_httbar_config, only: ki => ki_qp
+   use p0_ubaru_httbar_util_qp, only: cond_t, d => metric_tensor
+   implicit none
+   private
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+   integer, parameter :: ninjaidxt2mu0 = 0
+   integer, parameter :: ninjaidxt1mu0 = 1
+   integer, parameter :: ninjaidxt0mu0 = 2
+   integer, parameter :: ninjaidxt0mu2 = 3
+   public :: numerator_t3
+contains
+!---#[ subroutine brack_31:
+   pure subroutine brack_31(ninjaA, ninjaE3, ninjaE4, ninjaP, brack)
+      use p0_ubaru_httbar_model_qp
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_color_qp
+      use p0_ubaru_httbar_abbrevd3h13_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: ninjaA, ninjaE3, ninjaE4
+      complex(ki), intent(in) :: ninjaP
+      complex(ki), dimension(12) :: acd3
+      complex(ki), dimension (0:*), intent(inout) :: brack
+      acd3(1)=dotproduct(k2,ninjaE3)
+      acd3(2)=dotproduct(ninjaE3,spvak1l4)
+      acd3(3)=abb3(12)
+      acd3(4)=dotproduct(ninjaE3,spvak1l5)
+      acd3(5)=abb3(13)
+      acd3(6)=dotproduct(ninjaE3,spvak1l3)
+      acd3(7)=abb3(15)
+      acd3(8)=dotproduct(ninjaE3,spval3k2)
+      acd3(9)=abb3(14)
+      acd3(10)=acd3(3)*acd3(2)
+      acd3(11)=acd3(5)*acd3(4)
+      acd3(12)=acd3(7)*acd3(6)
+      acd3(10)=acd3(12)+acd3(10)+acd3(11)
+      acd3(10)=acd3(1)*acd3(10)
+      acd3(11)=acd3(9)*acd3(8)*acd3(2)
+      acd3(10)=acd3(11)+acd3(10)
+      brack(ninjaidxt2mu0)=acd3(10)
+   end subroutine brack_31
+!---#] subroutine brack_31:
+!---#[ subroutine brack_32:
+   pure subroutine brack_32(ninjaA, ninjaE3, ninjaE4, ninjaP, brack)
+      use p0_ubaru_httbar_model_qp
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_color_qp
+      use p0_ubaru_httbar_abbrevd3h13_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: ninjaA, ninjaE3, ninjaE4
+      complex(ki), intent(in) :: ninjaP
+      complex(ki), dimension(35) :: acd3
+      complex(ki), dimension (0:*), intent(inout) :: brack
+      acd3(1)=dotproduct(k2,ninjaE3)
+      acd3(2)=dotproduct(ninjaE4,spvak1l5)
+      acd3(3)=abb3(13)
+      acd3(4)=dotproduct(ninjaE4,spvak1l4)
+      acd3(5)=abb3(12)
+      acd3(6)=dotproduct(ninjaE4,spvak1l3)
+      acd3(7)=abb3(15)
+      acd3(8)=dotproduct(k2,ninjaE4)
+      acd3(9)=dotproduct(ninjaE3,spvak1l5)
+      acd3(10)=dotproduct(ninjaE3,spvak1l4)
+      acd3(11)=dotproduct(ninjaE3,spvak1l3)
+      acd3(12)=dotproduct(ninjaE4,spval3k2)
+      acd3(13)=abb3(14)
+      acd3(14)=dotproduct(ninjaE3,spval3k2)
+      acd3(15)=dotproduct(k2,ninjaA)
+      acd3(16)=dotproduct(ninjaA,spvak1l5)
+      acd3(17)=dotproduct(ninjaA,spvak1l4)
+      acd3(18)=dotproduct(ninjaA,spvak1l3)
+      acd3(19)=abb3(22)
+      acd3(20)=dotproduct(ninjaA,spval3k2)
+      acd3(21)=abb3(9)
+      acd3(22)=abb3(10)
+      acd3(23)=abb3(11)
+      acd3(24)=abb3(23)
+      acd3(25)=abb3(18)
+      acd3(26)=acd3(7)*acd3(6)
+      acd3(27)=acd3(5)*acd3(4)
+      acd3(28)=acd3(3)*acd3(2)
+      acd3(26)=acd3(28)+acd3(26)+acd3(27)
+      acd3(26)=acd3(26)*acd3(1)
+      acd3(27)=acd3(7)*acd3(11)
+      acd3(28)=acd3(5)*acd3(10)
+      acd3(29)=acd3(3)*acd3(9)
+      acd3(27)=acd3(29)+acd3(27)+acd3(28)
+      acd3(28)=acd3(27)*acd3(8)
+      acd3(29)=acd3(12)*acd3(10)*acd3(13)
+      acd3(30)=acd3(13)*acd3(14)
+      acd3(31)=acd3(30)*acd3(4)
+      acd3(26)=acd3(26)+acd3(28)+acd3(29)+acd3(31)
+      acd3(27)=acd3(15)*acd3(27)
+      acd3(28)=acd3(7)*acd3(18)
+      acd3(28)=acd3(28)+acd3(19)
+      acd3(29)=acd3(3)*acd3(16)
+      acd3(31)=acd3(5)*acd3(17)
+      acd3(29)=acd3(29)+acd3(31)+acd3(28)
+      acd3(29)=acd3(1)*acd3(29)
+      acd3(31)=acd3(14)*acd3(24)
+      acd3(32)=acd3(11)*acd3(23)
+      acd3(33)=acd3(9)*acd3(21)
+      acd3(30)=acd3(17)*acd3(30)
+      acd3(34)=acd3(13)*acd3(20)
+      acd3(34)=acd3(34)+acd3(22)
+      acd3(35)=acd3(10)*acd3(34)
+      acd3(27)=acd3(29)+acd3(35)+acd3(30)+acd3(33)+acd3(31)+acd3(32)+acd3(27)
+      acd3(29)=ninjaP*acd3(26)
+      acd3(30)=acd3(5)*acd3(15)
+      acd3(30)=acd3(30)+acd3(34)
+      acd3(30)=acd3(17)*acd3(30)
+      acd3(31)=acd3(3)*acd3(15)
+      acd3(31)=acd3(31)+acd3(21)
+      acd3(31)=acd3(16)*acd3(31)
+      acd3(28)=acd3(15)*acd3(28)
+      acd3(32)=acd3(20)*acd3(24)
+      acd3(33)=acd3(18)*acd3(23)
+      acd3(28)=acd3(33)+acd3(25)+acd3(32)+acd3(30)+acd3(29)+acd3(28)+acd3(31)
+      brack(ninjaidxt1mu0)=acd3(27)
+      brack(ninjaidxt0mu0)=acd3(28)
+      brack(ninjaidxt0mu2)=acd3(26)
+   end subroutine brack_32
+!---#] subroutine brack_32:
+!---#[ subroutine numerator_t3:
+   subroutine numerator_t3(ncut, a, b, c, param, deg, coeffs) &
+   & bind(c, name="p0_ubaru_httbar_d3h13_qp_ninja_t3")
+      use iso_c_binding, only: c_int
+      use quadninjago_module, only: ki => ki_nin
+      use p0_ubaru_httbar_globalsl1_qp, only: epspow
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_abbrevd3h13_qp
+      implicit none
+      integer(c_int), intent(in) :: ncut, deg
+      complex(ki), dimension(0:3), intent(in) :: a, b, c
+      complex(ki), intent(in) :: param
+      complex(ki), dimension(4) :: vecA, vecB, vecC
+      complex(ki), dimension(0:*), intent(out) :: coeffs
+      integer :: t1
+      complex(ki), dimension(4) :: qshift
+      qshift = k4
+      vecA(1:4) = + a(0:3) - qshift(1:4)
+      vecB(1:4) = + b(0:3)
+      vecC(1:4) = + c(0:3)
+      if (deg.lt.0) return
+      t1 = 0
+      call cond_t(epspow.eq.t1,brack_31,vecA,vecB,vecC,param,coeffs)
+      if (deg.le.(1+(-1))) return
+      call cond_t(epspow.eq.t1,brack_32,vecA,vecB,vecC,param,coeffs)
+   end subroutine numerator_t3
+!---#] subroutine numerator_t3:
+end module     p0_ubaru_httbar_d3h13l131_qp

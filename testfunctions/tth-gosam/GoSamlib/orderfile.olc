@@ -1,0 +1,14 @@
+# vim: syntax=olp
+#@OLP GoSam 2.1.1
+#@IgnoreUnknown True
+#@IgnoreCase False
+#@SyntaxExtensions 
+MatrixElementSquareType CHaveraged | OK
+CorrectionType QCD | OK
+IRregularisation CDR | OK
+AlphasPower 2 | OK
+AlphaPower 1 | OK
+SubdivideSubprocess no | OK
+-2 2 -> 25 6 -6 | 1 0
+2 -2 -> 25 6 -6 | 1 1
+21 21 -> 25 6 -6 | 1 2

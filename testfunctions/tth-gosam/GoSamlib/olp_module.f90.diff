@@ -1,0 +1,39 @@
+diff --git a/testfunctions/tth-gosam/GoSamlib/olp_module.f90 b/testfunctions/tth-gosam/GoSamlib/olp_module.f90
+index ab7c253..1722934 100644
+--- a/testfunctions/tth-gosam/GoSamlib/olp_module.f90
++++ b/testfunctions/tth-gosam/GoSamlib/olp_module.f90
+@@ -497,7 +497,7 @@ contains
+       real(kind=c_double), dimension(60), intent(out) :: res
+ 
+       real(kind=ki), dimension(5,4) :: vecs
+-      real(kind=ki), dimension(4) :: amp
++      real(kind=ki), dimension(5) :: amp
+       real(kind=c_double), optional :: acc
+       logical, optional :: blha1_mode
+       real(kind=ki) :: zero
+@@ -546,6 +546,7 @@ contains
+       res(2) = real(amp(3), c_double)
+       res(3) = real(amp(2), c_double)
+       res(4) = real(amp(1), c_double)
++      res(5) = real(amp(5), c_double)
+ 
+       if(present(blha1_mode)) then
+          if(blha1_mode) then
+@@ -643,7 +644,7 @@ contains
+       real(kind=c_double), intent(out) :: res
+ 
+       real(kind=ki), dimension(5,4) :: vecs
+-      real(kind=ki):: amp
++      real(kind=ki), dimension(2) :: amp
+ 
+       call init_event_parameters(0, parameters)
+ 
+@@ -659,7 +660,7 @@ contains
+       call quadninja_exit()
+ 
+       
+-      res = real(amp, c_double)
++      res = real(amp(1), c_double)
+ 
+    end subroutine evalborn2
+    !---#] subroutine evalborn2 :

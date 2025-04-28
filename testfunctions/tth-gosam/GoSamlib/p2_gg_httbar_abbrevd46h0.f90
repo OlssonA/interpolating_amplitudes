@@ -1,0 +1,244 @@
+module     p2_gg_httbar_abbrevd46h0
+   use p2_gg_httbar_config, only: ki
+   use p2_gg_httbar_kinematics, only: epstensor
+   use p2_gg_httbar_globalsh0
+   implicit none
+   private
+   complex(ki), dimension(49), public :: abb46
+   complex(ki), public :: R2d46
+   public :: init_abbrev
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+contains
+   subroutine     init_abbrev()
+      use p2_gg_httbar_config, only: deltaOS, &
+     &    logfile, debug_nlo_diagrams
+      use p2_gg_httbar_kinematics
+      use p2_gg_httbar_model
+      use p2_gg_httbar_color, only: TR
+      use p2_gg_httbar_globalsl1, only: epspow
+      implicit none
+      abb46(1)=1.0_ki/(mH**2+mT**2-es34-es45+es12)
+      abb46(2)=es12**(-1)
+      abb46(3)=spbl4k2**(-1)
+      abb46(4)=spak2l3**(-1)
+      abb46(5)=spbl3k2**(-1)
+      abb46(6)=spbl5k2**(-1)
+      abb46(7)=sqrt(mT**2)
+      abb46(8)=1.0_ki/(-mT**2+es34)
+      abb46(9)=abb46(1)+abb46(8)
+      abb46(10)=c2-c1
+      abb46(11)=-Nfrat*abb46(10)
+      abb46(12)=abb46(9)*abb46(11)
+      abb46(13)=5.0_ki*spbk2k1
+      abb46(14)=abb46(12)*abb46(13)
+      abb46(15)=abb46(6)*spbl3k2
+      abb46(16)=abb46(15)*spak1l3
+      abb46(16)=abb46(16)+spak1l5
+      abb46(16)=abb46(16)*abb46(3)
+      abb46(17)=abb46(6)*spak1l4
+      abb46(16)=abb46(16)+abb46(17)
+      abb46(18)=-abb46(16)*abb46(14)
+      abb46(19)=abb46(10)*abb46(9)
+      abb46(20)=abb46(19)*NC*spbk2k1
+      abb46(16)=-abb46(16)*abb46(20)
+      abb46(21)=abb46(18)-1.0_ki/2.0_ki*abb46(16)
+      abb46(21)=mT*abb46(21)
+      abb46(17)=abb46(17)*abb46(7)
+      abb46(22)=abb46(3)*abb46(7)
+      abb46(23)=abb46(22)*spak1l5
+      abb46(17)=abb46(17)+abb46(23)
+      abb46(14)=-abb46(17)*abb46(14)
+      abb46(17)=-abb46(17)*abb46(20)
+      abb46(20)=abb46(21)+abb46(14)-1.0_ki/2.0_ki*abb46(17)
+      abb46(20)=mT*abb46(20)
+      abb46(21)=abb46(10)*abb46(8)
+      abb46(23)=mH**2*abb46(4)*abb46(5)
+      abb46(24)=abb46(23)*spak2l4
+      abb46(25)=abb46(24)*spak1l5
+      abb46(26)=-abb46(25)*abb46(21)
+      abb46(27)=abb46(10)*abb46(1)
+      abb46(23)=abb46(23)*spak2l5
+      abb46(28)=abb46(23)*spak1l4
+      abb46(29)=-abb46(28)*abb46(27)
+      abb46(26)=abb46(26)+abb46(29)
+      abb46(29)=abb46(26)*spbk2k1
+      abb46(30)=spak1l4*spal3l5
+      abb46(31)=abb46(30)*spbl3k1
+      abb46(32)=spbl3k2*spal3l5
+      abb46(33)=abb46(32)*spak2l4
+      abb46(34)=abb46(31)-abb46(33)
+      abb46(35)=-abb46(34)*abb46(27)
+      abb46(36)=spbl3k2*spal3l4
+      abb46(37)=abb46(36)*spak2l5
+      abb46(38)=spak1l5*spal3l4
+      abb46(39)=abb46(38)*spbl3k1
+      abb46(40)=abb46(37)-abb46(39)
+      abb46(41)=-abb46(40)*abb46(21)
+      abb46(35)=abb46(29)+abb46(35)-abb46(41)
+      abb46(35)=abb46(35)*NC
+      abb46(41)=abb46(11)*abb46(8)
+      abb46(25)=abb46(25)*abb46(41)
+      abb46(42)=abb46(11)*abb46(1)
+      abb46(28)=abb46(28)*abb46(42)
+      abb46(25)=abb46(25)+abb46(28)
+      abb46(28)=-spbk2k1*abb46(25)
+      abb46(40)=abb46(40)*abb46(41)
+      abb46(34)=-abb46(34)*abb46(42)
+      abb46(28)=abb46(28)+abb46(40)+abb46(34)
+      abb46(20)=abb46(20)+5.0_ki*abb46(28)-1.0_ki/2.0_ki*abb46(35)
+      abb46(28)=gs**4*gHT*e*spbe2e1*spae1e2*TR*i_
+      abb46(34)=abb46(28)*abb46(2)
+      abb46(20)=1.0_ki/6.0_ki*abb46(20)*abb46(34)
+      abb46(40)=abb46(16)*mT
+      abb46(40)=abb46(40)+abb46(17)
+      abb46(40)=abb46(40)*mT
+      abb46(35)=abb46(35)+abb46(40)
+      abb46(43)=-5.0_ki/4.0_ki*abb46(35)*abb46(34)
+      abb46(16)=-abb46(18)-1.0_ki/4.0_ki*abb46(16)
+      abb46(16)=mT*abb46(16)
+      abb46(14)=abb46(16)-abb46(14)-1.0_ki/4.0_ki*abb46(17)
+      abb46(14)=mT*abb46(14)
+      abb46(16)=abb46(39)+5.0_ki*abb46(37)
+      abb46(16)=abb46(16)*abb46(21)
+      abb46(17)=abb46(31)+5.0_ki*abb46(33)
+      abb46(17)=abb46(17)*abb46(27)
+      abb46(16)=-abb46(29)+abb46(16)+abb46(17)
+      abb46(16)=NC*abb46(16)
+      abb46(17)=abb46(25)*abb46(13)
+      abb46(14)=abb46(14)+abb46(17)+1.0_ki/4.0_ki*abb46(16)
+      abb46(16)=abb46(28)*abb46(2)**2
+      abb46(14)=abb46(14)*abb46(16)
+      abb46(13)=abb46(26)*abb46(13)
+      abb46(17)=abb46(37)+5.0_ki*abb46(39)
+      abb46(17)=-abb46(17)*abb46(21)
+      abb46(18)=abb46(33)+5.0_ki*abb46(31)
+      abb46(18)=-abb46(18)*abb46(27)
+      abb46(13)=abb46(13)+abb46(17)+abb46(18)
+      abb46(13)=NC*abb46(13)
+      abb46(13)=abb46(13)+5.0_ki*abb46(40)
+      abb46(13)=1.0_ki/4.0_ki*abb46(13)*abb46(16)
+      abb46(17)=-1.0_ki/2.0_ki*abb46(35)*abb46(16)
+      abb46(18)=2.0_ki*abb46(16)
+      abb46(25)=abb46(18)*NC
+      abb46(21)=abb46(25)*spal3l4*abb46(21)
+      abb46(26)=-abb46(3)*abb46(12)
+      abb46(29)=abb46(26)*mT
+      abb46(31)=-abb46(22)*abb46(12)
+      abb46(29)=abb46(29)+abb46(31)
+      abb46(29)=abb46(29)*mT
+      abb46(33)=-abb46(24)*abb46(11)
+      abb46(35)=abb46(33)*abb46(8)
+      abb46(29)=abb46(29)+abb46(35)
+      abb46(35)=-abb46(29)*abb46(28)
+      abb46(37)=abb46(34)*spbl3k1
+      abb46(39)=-spak1k2*abb46(11)
+      abb46(40)=-abb46(39)*abb46(37)*abb46(8)*spal3l4
+      abb46(35)=abb46(35)+abb46(40)
+      abb46(40)=5.0_ki/2.0_ki*abb46(2)
+      abb46(35)=abb46(35)*abb46(40)
+      abb46(44)=-abb46(3)*abb46(19)
+      abb46(45)=NC*abb46(44)
+      abb46(26)=5.0_ki*abb46(26)+abb46(45)
+      abb46(26)=mT*abb46(26)
+      abb46(45)=-abb46(22)*abb46(19)
+      abb46(46)=NC*abb46(45)
+      abb46(26)=abb46(26)+5.0_ki*abb46(31)+abb46(46)
+      abb46(26)=mT*abb46(26)
+      abb46(10)=abb46(10)*NC
+      abb46(24)=abb46(24)*abb46(10)
+      abb46(31)=5.0_ki*abb46(33)-abb46(24)
+      abb46(31)=abb46(8)*abb46(31)
+      abb46(26)=abb46(26)+abb46(31)
+      abb46(26)=abb46(26)*abb46(18)
+      abb46(31)=-mT*abb46(44)
+      abb46(31)=-abb46(45)+abb46(31)
+      abb46(33)=mT*NC
+      abb46(31)=abb46(31)*abb46(33)
+      abb46(24)=abb46(8)*abb46(24)
+      abb46(24)=abb46(24)+abb46(31)
+      abb46(24)=abb46(24)*abb46(18)
+      abb46(31)=5.0_ki/2.0_ki*abb46(16)
+      abb46(39)=abb46(39)*abb46(31)
+      abb46(36)=-abb46(8)*abb46(36)*abb46(39)
+      abb46(27)=abb46(25)*spal3l5*abb46(27)
+      abb46(44)=-abb46(6)*abb46(12)
+      abb46(45)=abb46(44)*mT
+      abb46(46)=abb46(6)*abb46(7)
+      abb46(47)=-abb46(46)*abb46(12)
+      abb46(45)=abb46(45)+abb46(47)
+      abb46(45)=abb46(45)*mT
+      abb46(48)=-abb46(23)*abb46(11)
+      abb46(49)=abb46(48)*abb46(1)
+      abb46(45)=abb46(45)+abb46(49)
+      abb46(28)=-abb46(45)*abb46(28)
+      abb46(11)=-abb46(1)*spal3l5*abb46(11)
+      abb46(37)=-spak1k2*abb46(11)*abb46(37)
+      abb46(28)=abb46(28)+abb46(37)
+      abb46(28)=abb46(28)*abb46(40)
+      abb46(37)=-abb46(6)*abb46(19)
+      abb46(40)=NC*abb46(37)
+      abb46(40)=5.0_ki*abb46(44)+abb46(40)
+      abb46(40)=mT*abb46(40)
+      abb46(44)=-abb46(46)*abb46(19)
+      abb46(49)=NC*abb46(44)
+      abb46(40)=abb46(40)+5.0_ki*abb46(47)+abb46(49)
+      abb46(40)=mT*abb46(40)
+      abb46(10)=abb46(23)*abb46(10)
+      abb46(23)=5.0_ki*abb46(48)-abb46(10)
+      abb46(23)=abb46(1)*abb46(23)
+      abb46(23)=abb46(40)+abb46(23)
+      abb46(23)=abb46(23)*abb46(18)
+      abb46(37)=-mT*abb46(37)
+      abb46(37)=-abb46(44)+abb46(37)
+      abb46(33)=abb46(37)*abb46(33)
+      abb46(10)=abb46(1)*abb46(10)
+      abb46(10)=abb46(10)+abb46(33)
+      abb46(10)=abb46(10)*abb46(18)
+      abb46(32)=-abb46(1)*abb46(32)*abb46(39)
+      abb46(33)=abb46(15)*abb46(3)
+      abb46(37)=-abb46(33)*abb46(12)
+      abb46(39)=mT**2
+      abb46(40)=abb46(37)*abb46(39)
+      abb46(34)=-5.0_ki/2.0_ki*abb46(34)*abb46(40)
+      abb46(19)=-abb46(33)*abb46(19)
+      abb46(33)=NC*abb46(19)
+      abb46(33)=5.0_ki*abb46(37)+abb46(33)
+      abb46(18)=abb46(33)*abb46(39)*abb46(18)
+      abb46(19)=-abb46(19)*abb46(39)*abb46(25)
+      abb46(25)=abb46(38)*abb46(41)
+      abb46(30)=abb46(30)*abb46(42)
+      abb46(25)=abb46(25)+abb46(30)
+      abb46(30)=abb46(31)*spbk2k1
+      abb46(25)=abb46(25)*abb46(30)
+      abb46(33)=abb46(41)*spal3l4
+      abb46(16)=5.0_ki*abb46(16)
+      abb46(37)=abb46(16)*abb46(33)
+      abb46(38)=abb46(16)*abb46(11)
+      abb46(33)=spak2l5*abb46(33)
+      abb46(11)=-spak2l4*abb46(11)
+      abb46(11)=abb46(33)+abb46(11)
+      abb46(11)=abb46(11)*abb46(30)
+      abb46(15)=abb46(15)*spak2l3
+      abb46(15)=abb46(15)+spak2l5
+      abb46(15)=abb46(15)*abb46(3)
+      abb46(30)=abb46(6)*spak2l4
+      abb46(15)=abb46(15)+abb46(30)
+      abb46(15)=mT*abb46(15)
+      abb46(22)=abb46(22)*spak2l5
+      abb46(30)=abb46(46)*spak2l4
+      abb46(15)=abb46(15)+abb46(22)+abb46(30)
+      abb46(12)=mT*abb46(12)*abb46(15)
+      abb46(9)=-abb46(9)*abb46(48)*spak2l4
+      abb46(9)=abb46(9)+abb46(12)
+      abb46(9)=abb46(31)*spbk2k1*abb46(9)
+      abb46(12)=-abb46(29)*abb46(16)
+      abb46(15)=-abb46(45)*abb46(16)
+      abb46(16)=-abb46(16)*abb46(40)
+      R2d46=abb46(20)
+      rat2 = rat2 + R2d46
+      if (debug_nlo_diagrams) then
+          write (logfile,*) "<result name='r2' index='46' value='", &
+          & R2d46, "'/>"
+      end if
+   end subroutine
+end module p2_gg_httbar_abbrevd46h0

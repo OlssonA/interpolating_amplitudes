@@ -1,0 +1,150 @@
+module     p0_ubaru_httbar_abbrevd1h13
+   use p0_ubaru_httbar_config, only: ki
+   use p0_ubaru_httbar_kinematics, only: epstensor
+   use p0_ubaru_httbar_globalsh13
+   implicit none
+   private
+   complex(ki), dimension(41), public :: abb1
+   complex(ki), public :: R2d1
+   public :: init_abbrev
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+contains
+   subroutine     init_abbrev()
+      use p0_ubaru_httbar_config, only: deltaOS, &
+     &    logfile, debug_nlo_diagrams
+      use p0_ubaru_httbar_kinematics
+      use p0_ubaru_httbar_model
+      use p0_ubaru_httbar_color, only: TR
+      use p0_ubaru_httbar_globalsl1, only: epspow
+      implicit none
+      abb1(1)=1.0_ki/(-mT**2+es34)
+      abb1(2)=NC**(-1)
+      abb1(3)=es12**(-1)
+      abb1(4)=spak2l3**(-1)
+      abb1(5)=spbl3k2**(-1)
+      abb1(6)=spak2l4**(-1)
+      abb1(7)=spak2l5**(-1)
+      abb1(8)=sqrt(mT**2)
+      abb1(9)=abb1(2)**2
+      abb1(10)=abb1(9)*abb1(8)
+      abb1(11)=i_*e*gHT*abb1(1)*TR**2*gs**4
+      abb1(12)=abb1(11)*abb1(3)
+      abb1(13)=abb1(10)*abb1(12)
+      abb1(14)=abb1(13)*mT
+      abb1(15)=mT*abb1(2)
+      abb1(16)=abb1(15)**2
+      abb1(17)=abb1(16)*abb1(12)
+      abb1(14)=abb1(14)+abb1(17)
+      abb1(14)=abb1(14)*c1
+      abb1(17)=abb1(3)*abb1(2)
+      abb1(18)=abb1(17)*abb1(11)
+      abb1(19)=mT**2
+      abb1(20)=abb1(19)*abb1(18)
+      abb1(21)=abb1(12)*abb1(15)
+      abb1(22)=abb1(21)*abb1(8)
+      abb1(20)=abb1(20)+abb1(22)
+      abb1(20)=abb1(20)*c2
+      abb1(14)=abb1(14)-abb1(20)
+      abb1(20)=spbl5k2*spak1k2
+      abb1(23)=abb1(20)*abb1(6)
+      abb1(24)=abb1(23)*abb1(14)
+      abb1(25)=abb1(12)*c1
+      abb1(26)=abb1(25)*abb1(9)
+      abb1(18)=abb1(18)*c2
+      abb1(27)=abb1(26)-abb1(18)
+      abb1(28)=abb1(27)*abb1(20)
+      abb1(29)=spbl4k2*mH**2*abb1(5)*abb1(4)
+      abb1(30)=abb1(28)*abb1(29)
+      abb1(24)=abb1(30)+abb1(24)
+      abb1(30)=abb1(14)*abb1(7)
+      abb1(31)=spbl4k2*spak1k2
+      abb1(32)=-abb1(31)*abb1(30)
+      abb1(33)=abb1(16)*abb1(25)
+      abb1(34)=abb1(18)*abb1(19)
+      abb1(33)=abb1(33)-abb1(34)
+      abb1(34)=spak2l3*abb1(6)
+      abb1(35)=abb1(34)*spbl3k2
+      abb1(36)=abb1(7)*spak1k2
+      abb1(37)=abb1(35)*abb1(36)
+      abb1(38)=-abb1(33)*abb1(37)
+      abb1(39)=spak1l3*spbl4l3
+      abb1(40)=abb1(39)*spbl5k2
+      abb1(41)=-abb1(27)*abb1(40)
+      abb1(32)=abb1(41)+abb1(38)+abb1(32)-abb1(24)
+      abb1(31)=abb1(7)*abb1(31)
+      abb1(23)=abb1(23)+abb1(31)
+      abb1(31)=abb1(8)**2
+      abb1(23)=-abb1(23)*abb1(31)*abb1(14)
+      abb1(26)=abb1(26)*abb1(31)
+      abb1(18)=abb1(31)*abb1(18)
+      abb1(26)=abb1(26)-abb1(18)
+      abb1(20)=-abb1(20)*abb1(29)
+      abb1(20)=-abb1(40)+abb1(20)
+      abb1(20)=abb1(26)*abb1(20)
+      abb1(18)=abb1(19)*abb1(18)
+      abb1(26)=abb1(15)*abb1(8)
+      abb1(26)=-abb1(25)*abb1(26)**2
+      abb1(18)=abb1(18)+abb1(26)
+      abb1(18)=abb1(18)*abb1(37)
+      abb1(18)=abb1(18)+abb1(23)+abb1(20)
+      abb1(18)=2.0_ki*abb1(18)
+      abb1(10)=abb1(25)*abb1(10)*mT
+      abb1(20)=abb1(22)*c2
+      abb1(10)=abb1(10)-abb1(20)
+      abb1(20)=2.0_ki*abb1(10)
+      abb1(22)=-abb1(7)*abb1(39)*abb1(20)
+      abb1(22)=abb1(22)+abb1(24)
+      abb1(22)=4.0_ki*abb1(22)
+      abb1(23)=abb1(36)*abb1(20)
+      abb1(23)=abb1(28)+abb1(23)
+      abb1(24)=2.0_ki*spbl4l3
+      abb1(23)=abb1(23)*abb1(24)
+      abb1(25)=abb1(11)*abb1(8)
+      abb1(17)=abb1(25)*abb1(17)
+      abb1(17)=abb1(17)+abb1(21)
+      abb1(17)=abb1(17)*c2
+      abb1(9)=abb1(9)*mT
+      abb1(12)=abb1(12)*abb1(9)
+      abb1(12)=abb1(12)+abb1(13)
+      abb1(12)=abb1(12)*c1
+      abb1(12)=abb1(17)-abb1(12)
+      abb1(12)=abb1(8)*abb1(12)
+      abb1(13)=-spbl4k2*abb1(12)
+      abb1(10)=abb1(10)*abb1(35)
+      abb1(10)=abb1(13)+abb1(10)
+      abb1(10)=4.0_ki*abb1(10)
+      abb1(13)=-abb1(6)*abb1(14)
+      abb1(14)=-abb1(27)*abb1(29)
+      abb1(13)=abb1(13)+abb1(14)
+      abb1(13)=4.0_ki*abb1(13)
+      abb1(14)=-abb1(27)*abb1(24)
+      abb1(12)=spbl5k2*abb1(12)
+      abb1(17)=abb1(11)*abb1(19)*abb1(2)
+      abb1(15)=abb1(15)*abb1(25)
+      abb1(15)=abb1(17)+abb1(15)
+      abb1(15)=c2*abb1(15)
+      abb1(11)=abb1(16)*abb1(11)
+      abb1(9)=-abb1(25)*abb1(9)
+      abb1(9)=-abb1(11)+abb1(9)
+      abb1(9)=c1*abb1(9)
+      abb1(9)=abb1(15)+abb1(9)
+      abb1(9)=abb1(7)*abb1(9)
+      abb1(9)=2.0_ki*abb1(12)+abb1(9)
+      abb1(9)=2.0_ki*abb1(9)
+      abb1(12)=-4.0_ki*abb1(30)
+      abb1(15)=-spbl5k2*abb1(20)
+      abb1(16)=c2*abb1(17)
+      abb1(11)=-c1*abb1(11)
+      abb1(11)=abb1(16)+abb1(11)
+      abb1(11)=abb1(7)*abb1(11)
+      abb1(11)=abb1(15)+abb1(11)
+      abb1(11)=2.0_ki*abb1(11)*abb1(34)
+      abb1(15)=-4.0_ki*abb1(7)*abb1(33)*abb1(34)
+      R2d1=abb1(32)
+      rat2 = rat2 + R2d1
+      if (debug_nlo_diagrams) then
+          write (logfile,*) "<result name='r2' index='1' value='", &
+          & R2d1, "'/>"
+      end if
+   end subroutine
+end module p0_ubaru_httbar_abbrevd1h13

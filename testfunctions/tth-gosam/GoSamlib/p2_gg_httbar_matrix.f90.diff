@@ -1,0 +1,418 @@
+diff --git a/testfunctions/tth-gosam/GoSamlib/p2_gg_httbar_matrix.f90 b/testfunctions/tth-gosam/GoSamlib/p2_gg_httbar_matrix.f90
+index 00a8070..7412e63 100644
+--- a/testfunctions/tth-gosam/GoSamlib/p2_gg_httbar_matrix.f90
++++ b/testfunctions/tth-gosam/GoSamlib/p2_gg_httbar_matrix.f90
+@@ -224,12 +224,12 @@ contains
+       real(ki_qp), dimension(5, 4) :: vecs_qp, vecsrot_qp
+       real(ki), dimension(5, 4) :: vecsrot
+       real(ki), intent(in) :: scale2
+-      real(ki), dimension(1:4), intent(out) :: amp
+-      real(ki_qp), dimension(1:4) :: amp_qp
++      real(ki), dimension(1:5), intent(out) :: amp
++      real(ki_qp), dimension(1:5) :: amp_qp
+       real(ki_qp), dimension(2:3) :: irp_qp
+       real(ki_qp) :: scale2_qp, rat2_qp
+       real(ki), dimension(0:3) :: scales2
+-      real(ki), dimension(1:4) :: ampdef, amprot, ampres, ampresrot
++      real(ki), dimension(1:5) :: ampdef, amprot, ampres, ampresrot
+       real(ki) :: rat2, kfac, zero, angle
+       real(ki), dimension(2:3) :: irp
+       integer, intent(out) :: prec 
+@@ -425,7 +425,7 @@ contains
+       implicit none
+       real(ki), dimension(5, 4), intent(in) :: vecs
+       real(ki), intent(in) :: scale2
+-      real(ki), dimension(4), intent(out) :: amp
++      real(ki), dimension(5), intent(out) :: amp
+       real(ki), intent(out) :: rat2
+       logical, intent(out), optional :: ok
+       integer, intent(in), optional :: h
+@@ -455,9 +455,9 @@ contains
+ 
+ 
+       if (present(h)) then
+-         amp(1) = samplitudel0(vecs, h)
++         amp((/1,5/)) = samplitudel0(vecs, h)
+       else
+-         amp(1)   = samplitudel0(vecs)
++         amp((/1,5/))   = samplitudel0(vecs)
+       end if
+       select case (renormalisation)
+       case (0)
+@@ -594,10 +594,12 @@ contains
+    function     samplitudel0(vecs, h) result(amp)
+       use p2_gg_httbar_config, only: logfile
+       use p2_gg_httbar_kinematics, only: init_event
++      use p2_gg_httbar_color, only: T4T5
+       implicit none
+       real(ki), dimension(5, 4), intent(in) :: vecs
+       integer, optional, intent(in) :: h
+-      real(ki) :: amp, heli_amp
++      real(ki), dimension(2) :: amp
++      real(ki) heli_amp
+       complex(ki), dimension(numcs) :: color_vector
+       logical, dimension(0:15) :: eval_heli
+       real(ki), dimension(5, 4) :: pvecs
+@@ -629,7 +631,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(1)) then
+          if (debug_lo_diagrams) then
+@@ -650,7 +653,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(2)) then
+          if (debug_lo_diagrams) then
+@@ -671,7 +675,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(3)) then
+          if (debug_lo_diagrams) then
+@@ -692,7 +697,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(4)) then
+          if (debug_lo_diagrams) then
+@@ -713,7 +719,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(5)) then
+          if (debug_lo_diagrams) then
+@@ -734,7 +741,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(6)) then
+          if (debug_lo_diagrams) then
+@@ -755,7 +763,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(7)) then
+          if (debug_lo_diagrams) then
+@@ -776,7 +785,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(8)) then
+          if (debug_lo_diagrams) then
+@@ -797,7 +807,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(9)) then
+          if (debug_lo_diagrams) then
+@@ -818,7 +829,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(10)) then
+          if (debug_lo_diagrams) then
+@@ -839,7 +851,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(11)) then
+          if (debug_lo_diagrams) then
+@@ -860,7 +873,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(12)) then
+          if (debug_lo_diagrams) then
+@@ -881,7 +895,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(13)) then
+          if (debug_lo_diagrams) then
+@@ -902,7 +917,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(14)) then
+          if (debug_lo_diagrams) then
+@@ -923,7 +939,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (eval_heli(15)) then
+          if (debug_lo_diagrams) then
+@@ -944,7 +961,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square(color_vector, T4T5)
+       end if
+       if (include_helicity_avg_factor) then
+          amp = amp / real(in_helicities, ki)
+@@ -1771,6 +1789,7 @@ contains
+       use p2_gg_httbar_kinematics, only: &
+          & init_event, corrections_are_qcd
+       use p2_gg_httbar_model
++      use p2_gg_httbar_color, only: T4T5
+       implicit none
+       real(ki), dimension(5, 4), intent(in) :: vecs
+       real(ki), intent(in) :: scale2
+@@ -2186,7 +2205,7 @@ contains
+       implicit none
+       real(ki_qp), dimension(5, 4), intent(in) :: vecs
+       real(ki_qp), intent(in) :: scale2
+-      real(ki_qp), dimension(4), intent(out) :: amp
++      real(ki_qp), dimension(5), intent(out) :: amp
+       real(ki_qp), intent(out) :: rat2
+       logical, intent(out), optional :: ok
+       integer, intent(in), optional :: h
+@@ -2216,9 +2235,9 @@ contains
+ 
+       
+       if (present(h)) then
+-         amp(1) = samplitudel0_qp(vecs, h)
++         amp((/1,5/)) = samplitudel0_qp(vecs, h)
+       else
+-         amp(1)   = samplitudel0_qp(vecs)
++         amp((/1,5/))   = samplitudel0_qp(vecs)
+       end if
+       select case (renormalisation)
+       case (0)
+@@ -2355,10 +2374,12 @@ contains
+    function     samplitudel0_qp(vecs, h) result(amp)
+       use p2_gg_httbar_config, only: logfile
+       use p2_gg_httbar_kinematics_qp, only: init_event
++      use p2_gg_httbar_color_qp, only: T4T5
+       implicit none
+       real(ki_qp), dimension(5, 4), intent(in) :: vecs
+       integer, optional, intent(in) :: h
+-      real(ki_qp) :: amp, heli_amp
++      real(ki_qp), dimension(2) :: amp
++      real(ki_qp) :: heli_amp
+       complex(ki_qp), dimension(numcs) :: color_vector
+       logical, dimension(0:15) :: eval_heli
+       real(ki_qp), dimension(5, 4) :: pvecs
+@@ -2390,7 +2411,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(1)) then
+          if (debug_lo_diagrams) then
+@@ -2411,7 +2433,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(2)) then
+          if (debug_lo_diagrams) then
+@@ -2432,7 +2455,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(3)) then
+          if (debug_lo_diagrams) then
+@@ -2453,7 +2477,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(4)) then
+          if (debug_lo_diagrams) then
+@@ -2474,7 +2499,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(5)) then
+          if (debug_lo_diagrams) then
+@@ -2495,7 +2521,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(6)) then
+          if (debug_lo_diagrams) then
+@@ -2516,7 +2543,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(7)) then
+          if (debug_lo_diagrams) then
+@@ -2537,7 +2565,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(8)) then
+          if (debug_lo_diagrams) then
+@@ -2558,7 +2587,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(9)) then
+          if (debug_lo_diagrams) then
+@@ -2579,7 +2609,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(10)) then
+          if (debug_lo_diagrams) then
+@@ -2600,7 +2631,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(11)) then
+          if (debug_lo_diagrams) then
+@@ -2621,7 +2653,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(12)) then
+          if (debug_lo_diagrams) then
+@@ -2642,7 +2675,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(13)) then
+          if (debug_lo_diagrams) then
+@@ -2663,7 +2697,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(14)) then
+          if (debug_lo_diagrams) then
+@@ -2684,7 +2719,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (eval_heli(15)) then
+          if (debug_lo_diagrams) then
+@@ -2705,7 +2741,8 @@ contains
+                 & "<result kind='lo' value='", heli_amp, "'/>"
+             write(logfile,*) "</helicity>"
+          end if
+-         amp = amp + heli_amp
++         amp(1) = amp(1) + heli_amp
++         amp(2) = amp(2) + square_qp(color_vector, T4T5)
+       end if
+       if (include_helicity_avg_factor) then
+          amp = amp / real(in_helicities, ki_qp)

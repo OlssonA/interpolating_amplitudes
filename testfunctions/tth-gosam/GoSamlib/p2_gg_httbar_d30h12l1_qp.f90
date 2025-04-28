@@ -1,0 +1,132 @@
+module     p2_gg_httbar_d30h12l1_qp
+   ! file: /itp/swift/jannisl/fast/POWHEG-BOX-V2/ttH_for_samplecpp_updated/GoSa &
+   ! &m_POWHEG/Virtual/p2_gg_httbar/helicity12d30h12l1_qp.f90
+   ! generator: buildfortran.py
+   use p2_gg_httbar_config, only: ki => ki_qp
+   use p2_gg_httbar_util_qp, only: cond
+   implicit none
+   private
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+   public :: numerator_ninja
+contains
+!---#[ function brack_1:
+   pure function brack_1(Q,mu2) result(brack)
+      use p2_gg_httbar_model_qp
+      use p2_gg_httbar_kinematics_qp
+      use p2_gg_httbar_color_qp
+      use p2_gg_httbar_abbrevd30h12_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: Q
+      complex(ki), intent(in) :: mu2
+      complex(ki) :: brack
+      complex(ki) :: acc30(37)
+      complex(ki) :: Qspvae2k1
+      complex(ki) :: Qspvae2k2
+      complex(ki) :: Qspvae2e1
+      complex(ki) :: Qspvae2l5
+      complex(ki) :: Qspval3e2
+      complex(ki) :: Qspvak2e2
+      complex(ki) :: Qspval5e2
+      complex(ki) :: Qspvae1e2
+      complex(ki) :: Qspvak1e2
+      complex(ki) :: Qspvae2l4
+      complex(ki) :: Qspvae2l3
+      Qspvae2k1 = dotproduct(Q,spvae2k1)
+      Qspvae2k2 = dotproduct(Q,spvae2k2)
+      Qspvae2e1 = dotproduct(Q,spvae2e1)
+      Qspvae2l5 = dotproduct(Q,spvae2l5)
+      Qspval3e2 = dotproduct(Q,spval3e2)
+      Qspvak2e2 = dotproduct(Q,spvak2e2)
+      Qspval5e2 = dotproduct(Q,spval5e2)
+      Qspvae1e2 = dotproduct(Q,spvae1e2)
+      Qspvak1e2 = dotproduct(Q,spvak1e2)
+      Qspvae2l4 = dotproduct(Q,spvae2l4)
+      Qspvae2l3 = dotproduct(Q,spvae2l3)
+      acc30(1)=abb30(10)
+      acc30(2)=abb30(11)
+      acc30(3)=abb30(12)
+      acc30(4)=abb30(13)
+      acc30(5)=abb30(14)
+      acc30(6)=abb30(15)
+      acc30(7)=abb30(16)
+      acc30(8)=abb30(18)
+      acc30(9)=abb30(19)
+      acc30(10)=abb30(20)
+      acc30(11)=abb30(21)
+      acc30(12)=abb30(22)
+      acc30(13)=abb30(24)
+      acc30(14)=abb30(25)
+      acc30(15)=abb30(28)
+      acc30(16)=abb30(30)
+      acc30(17)=abb30(34)
+      acc30(18)=abb30(36)
+      acc30(19)=abb30(37)
+      acc30(20)=abb30(41)
+      acc30(21)=abb30(43)
+      acc30(22)=abb30(45)
+      acc30(23)=abb30(46)
+      acc30(24)=abb30(48)
+      acc30(25)=abb30(50)
+      acc30(26)=abb30(63)
+      acc30(27)=acc30(11)*Qspvae2k1
+      acc30(28)=acc30(15)*Qspvae2k2
+      acc30(29)=acc30(17)*Qspvae2e1
+      acc30(30)=acc30(24)*Qspvae2l5
+      acc30(27)=acc30(30)+acc30(19)+acc30(29)+acc30(28)+acc30(27)
+      acc30(27)=Qspval3e2*acc30(27)
+      acc30(28)=acc30(6)*Qspvae2e1
+      acc30(29)=acc30(9)*Qspvae2k2
+      acc30(30)=acc30(12)*Qspvae2k1
+      acc30(31)=acc30(13)*Qspvae2l5
+      acc30(28)=acc30(31)+acc30(30)+acc30(29)+acc30(28)+acc30(3)
+      acc30(28)=Qspvak2e2*acc30(28)
+      acc30(29)=acc30(4)*Qspval5e2
+      acc30(30)=-acc30(23)*Qspvae1e2
+      acc30(31)=acc30(26)*Qspvak1e2
+      acc30(29)=acc30(31)+acc30(30)+acc30(29)+acc30(2)
+      acc30(29)=Qspvae2l4*acc30(29)
+      acc30(30)=acc30(16)*Qspval5e2
+      acc30(31)=acc30(22)*Qspvak1e2
+      acc30(32)=-acc30(25)*Qspvae1e2
+      acc30(30)=acc30(32)+acc30(31)+acc30(30)+acc30(8)
+      acc30(30)=Qspvae2l3*acc30(30)
+      acc30(31)=acc30(5)*Qspvae2e1
+      acc30(32)=acc30(7)*Qspvak1e2
+      acc30(33)=acc30(10)*Qspvae2k1
+      acc30(34)=acc30(14)*Qspvae1e2
+      acc30(35)=acc30(18)*Qspvae2k2
+      acc30(36)=acc30(20)*Qspvae2l5
+      acc30(37)=acc30(21)*Qspval5e2
+      brack=acc30(1)+acc30(27)+acc30(28)+acc30(29)+acc30(30)+acc30(31)+acc30(32&
+      &)+acc30(33)+acc30(34)+acc30(35)+acc30(36)+acc30(37)
+   end  function brack_1
+!---#] function brack_1:
+!---#[ numerator interfaces:
+   !------#[ subroutine numerator_ninja:
+   subroutine numerator_ninja(ncut, Q_ext, mu2_ext, numerator) &
+   & bind(c, name="p2_gg_httbar_d30h12l1_qp_ninja")
+      use iso_c_binding, only: c_int
+      use quadninjago_module, only: ki_nin
+      use p2_gg_httbar_globalsl1_qp, only: epspow
+      use p2_gg_httbar_kinematics_qp
+      use p2_gg_httbar_abbrevd30h12_qp
+      implicit none
+      integer(c_int), intent(in) :: ncut
+      complex(ki_nin), dimension(0:3), intent(in) :: Q_ext
+      complex(ki_nin), intent(in) :: mu2_ext
+      complex(ki_nin), intent(out) :: numerator
+      complex(ki) :: d30
+      ! The Q that goes into the diagram
+      complex(ki), dimension(4) :: Q
+      complex(ki) :: mu2
+      real(ki), dimension(0:3) :: qshift
+      qshift = -k2+k3+k4
+      Q(1:4)  =cmplx(real(+Q_ext(0:3)  -qshift(:),  ki_nin), aimag(+Q_ext(0:3))&
+      &, ki)
+      d30 = 0.0_ki
+      d30 = (cond(epspow.eq.0,brack_1,Q,mu2))
+      numerator = cmplx(real(d30, ki), aimag(d30), ki_nin)
+   end subroutine numerator_ninja
+   !------#] subroutine numerator_ninja:
+!---#] numerator interfaces:
+end module p2_gg_httbar_d30h12l1_qp

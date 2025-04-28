@@ -1,0 +1,16 @@
+# vim: syntax=olp
+#@OLP GoSam 2.1.1
+#@IgnoreUnknown True
+#@IgnoreCase False
+#@SyntaxExtensions 
+InterfaceVersion BLHA2 | OK
+CorrectionType QCD | OK
+IRregularisation CDR | OK
+AlphaPower 1 | OK
+ResonanceTreatment FixedWidthScheme | OK # Ignored by OLP
+EWRenormalisationScheme alphaMZ | OK # Ignored by OLP
+AmplitudeType LoopInduced | OK
+MassiveParticles 6 | OK
+ExcludedParticles 1 2 3 4 5 | OK
+AlphasPower 3 | OK
+21 21 -> 21 25 | 1 0

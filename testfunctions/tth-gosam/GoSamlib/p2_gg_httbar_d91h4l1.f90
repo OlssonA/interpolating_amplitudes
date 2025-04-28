@@ -1,0 +1,181 @@
+module     p2_gg_httbar_d91h4l1
+   ! file: /itp/swift/jannisl/fast/POWHEG-BOX-V2/ttH_for_samplecpp_updated/GoSa &
+   ! &m_POWHEG/Virtual/p2_gg_httbar/helicity4d91h4l1.f90
+   ! generator: buildfortran.py
+   use p2_gg_httbar_config, only: ki
+   use p2_gg_httbar_util, only: cond
+   implicit none
+   private
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+   public :: numerator_ninja
+contains
+!---#[ function brack_1:
+   pure function brack_1(Q,mu2) result(brack)
+      use p2_gg_httbar_model
+      use p2_gg_httbar_kinematics
+      use p2_gg_httbar_color
+      use p2_gg_httbar_abbrevd91h4
+      implicit none
+      complex(ki), dimension(4), intent(in) :: Q
+      complex(ki), intent(in) :: mu2
+      complex(ki) :: brack
+      complex(ki) :: acc91(58)
+      complex(ki) :: Qspvak2e1
+      complex(ki) :: QspQ
+      complex(ki) :: Qspvak1l3
+      complex(ki) :: Qspvak1k2
+      complex(ki) :: Qspval4e1
+      complex(ki) :: Qspval3e1
+      complex(ki) :: Qspval5e1
+      complex(ki) :: Qspvae1e2
+      complex(ki) :: Qspvae1l3
+      complex(ki) :: Qspvae1k2
+      complex(ki) :: Qspvae1l4
+      complex(ki) :: Qspe2
+      complex(ki) :: Qspval5k1
+      complex(ki) :: Qspval3k1
+      complex(ki) :: Qspvae2e1
+      Qspvak2e1 = dotproduct(Q,spvak2e1)
+      QspQ = dotproduct(Q,Q)
+      Qspvak1l3 = dotproduct(Q,spvak1l3)
+      Qspvak1k2 = dotproduct(Q,spvak1k2)
+      Qspval4e1 = dotproduct(Q,spval4e1)
+      Qspval3e1 = dotproduct(Q,spval3e1)
+      Qspval5e1 = dotproduct(Q,spval5e1)
+      Qspvae1e2 = dotproduct(Q,spvae1e2)
+      Qspvae1l3 = dotproduct(Q,spvae1l3)
+      Qspvae1k2 = dotproduct(Q,spvae1k2)
+      Qspvae1l4 = dotproduct(Q,spvae1l4)
+      Qspe2 = dotproduct(Q,e2)
+      Qspval5k1 = dotproduct(Q,spval5k1)
+      Qspval3k1 = dotproduct(Q,spval3k1)
+      Qspvae2e1 = dotproduct(Q,spvae2e1)
+      acc91(1)=abb91(8)
+      acc91(2)=abb91(9)
+      acc91(3)=abb91(10)
+      acc91(4)=abb91(11)
+      acc91(5)=abb91(12)
+      acc91(6)=abb91(13)
+      acc91(7)=abb91(14)
+      acc91(8)=abb91(15)
+      acc91(9)=abb91(16)
+      acc91(10)=abb91(17)
+      acc91(11)=abb91(18)
+      acc91(12)=abb91(19)
+      acc91(13)=abb91(20)
+      acc91(14)=abb91(21)
+      acc91(15)=abb91(22)
+      acc91(16)=abb91(23)
+      acc91(17)=abb91(24)
+      acc91(18)=abb91(25)
+      acc91(19)=abb91(26)
+      acc91(20)=abb91(27)
+      acc91(21)=abb91(28)
+      acc91(22)=abb91(29)
+      acc91(23)=abb91(30)
+      acc91(24)=abb91(31)
+      acc91(25)=abb91(32)
+      acc91(26)=abb91(33)
+      acc91(27)=abb91(34)
+      acc91(28)=abb91(35)
+      acc91(29)=abb91(37)
+      acc91(30)=abb91(42)
+      acc91(31)=abb91(43)
+      acc91(32)=abb91(45)
+      acc91(33)=abb91(50)
+      acc91(34)=abb91(55)
+      acc91(35)=abb91(57)
+      acc91(36)=abb91(61)
+      acc91(37)=abb91(63)
+      acc91(38)=abb91(64)
+      acc91(39)=abb91(65)
+      acc91(40)=abb91(66)
+      acc91(41)=abb91(69)
+      acc91(42)=abb91(79)
+      acc91(43)=abb91(80)
+      acc91(44)=acc91(3)*Qspvak2e1
+      acc91(45)=acc91(16)*QspQ
+      acc91(46)=acc91(26)*Qspvak1l3
+      acc91(47)=acc91(28)*Qspvak1k2
+      acc91(48)=acc91(31)*Qspval4e1
+      acc91(49)=acc91(36)*Qspval3e1
+      acc91(50)=acc91(40)*Qspval5e1
+      acc91(44)=acc91(50)+acc91(49)+acc91(48)+acc91(47)+acc91(46)+acc91(45)+acc&
+      &91(44)+acc91(1)
+      acc91(44)=Qspvae1e2*acc91(44)
+      acc91(45)=acc91(10)*Qspvae1l3
+      acc91(46)=acc91(13)*Qspvae1k2
+      acc91(45)=acc91(46)+acc91(45)+acc91(9)
+      acc91(45)=acc91(45)*Qspvak2e1
+      acc91(46)=acc91(23)*Qspval5e1
+      acc91(47)=acc91(35)*Qspval3e1
+      acc91(46)=acc91(47)+acc91(30)+acc91(46)
+      acc91(46)=acc91(46)*Qspvae1l4
+      acc91(47)=acc91(8)*Qspvae1k2
+      acc91(48)=acc91(29)*Qspvae1l3
+      acc91(49)=acc91(33)*Qspval5e1
+      acc91(50)=acc91(38)*Qspval3e1
+      acc91(45)=acc91(50)+acc91(49)+acc91(48)+acc91(25)+acc91(47)+acc91(46)+acc&
+      &91(45)
+      acc91(45)=Qspe2*acc91(45)
+      acc91(46)=acc91(11)*Qspvae1k2
+      acc91(47)=acc91(17)*Qspval5k1
+      acc91(48)=acc91(18)*Qspvae1l4
+      acc91(49)=acc91(20)*Qspval3k1
+      acc91(50)=acc91(37)*QspQ
+      acc91(51)=acc91(42)*Qspvae1l3
+      acc91(46)=acc91(51)+acc91(50)+acc91(34)+acc91(49)+acc91(48)+acc91(47)+acc&
+      &91(46)
+      acc91(46)=Qspvae2e1*acc91(46)
+      acc91(47)=acc91(32)*Qspval5e1
+      acc91(48)=acc91(43)*Qspval3e1
+      acc91(47)=acc91(48)+acc91(47)+acc91(2)
+      acc91(47)=Qspvae1l4*acc91(47)
+      acc91(48)=acc91(4)*Qspvae1l3
+      acc91(49)=acc91(12)*Qspvae1k2
+      acc91(48)=acc91(49)+acc91(6)+acc91(48)
+      acc91(48)=Qspvak2e1*acc91(48)
+      acc91(49)=acc91(5)*Qspvae1k2
+      acc91(50)=acc91(14)*Qspval5k1
+      acc91(51)=acc91(15)*Qspval3e1
+      acc91(52)=acc91(19)*Qspval3k1
+      acc91(53)=acc91(21)*Qspvak1l3
+      acc91(54)=acc91(22)*QspQ
+      acc91(55)=acc91(24)*Qspval5e1
+      acc91(56)=acc91(27)*Qspvak1k2
+      acc91(57)=acc91(39)*Qspval4e1
+      acc91(58)=acc91(41)*Qspvae1l3
+      brack=acc91(7)+acc91(44)+acc91(45)+acc91(46)+acc91(47)+acc91(48)+acc91(49&
+      &)+acc91(50)+acc91(51)+acc91(52)+acc91(53)+acc91(54)+acc91(55)+acc91(56)+&
+      &acc91(57)+acc91(58)
+   end  function brack_1
+!---#] function brack_1:
+!---#[ numerator interfaces:
+   !------#[ subroutine numerator_ninja:
+   subroutine numerator_ninja(ncut, Q_ext, mu2_ext, numerator) &
+   & bind(c, name="p2_gg_httbar_d91h4l1_ninja")
+      use iso_c_binding, only: c_int
+      use ninjago_module, only: ki_nin
+      use p2_gg_httbar_globalsl1, only: epspow
+      use p2_gg_httbar_kinematics
+      use p2_gg_httbar_abbrevd91h4
+      implicit none
+      integer(c_int), intent(in) :: ncut
+      complex(ki_nin), dimension(0:3), intent(in) :: Q_ext
+      complex(ki_nin), intent(in) :: mu2_ext
+      complex(ki_nin), intent(out) :: numerator
+      complex(ki) :: d91
+      ! The Q that goes into the diagram
+      complex(ki), dimension(4) :: Q
+      complex(ki) :: mu2
+      real(ki), dimension(0:3) :: qshift
+      qshift = k4
+      Q(1:4)  =cmplx(real(+Q_ext(0:3)  -qshift(:),  ki_nin), aimag(+Q_ext(0:3))&
+      &, ki)
+      d91 = 0.0_ki
+      d91 = (cond(epspow.eq.0,brack_1,Q,mu2))
+      numerator = cmplx(real(d91, ki), aimag(d91), ki_nin)
+   end subroutine numerator_ninja
+   !------#] subroutine numerator_ninja:
+!---#] numerator interfaces:
+end module p2_gg_httbar_d91h4l1

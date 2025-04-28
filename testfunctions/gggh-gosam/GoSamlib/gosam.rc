@@ -1,0 +1,14 @@
+model=smdiag_complex
+model.options=ewchoose:1,mBMS:0,mB:0,wZ:0,wH:0,wT:0,wW:0,wB:0
+
+zero=wH,wT
+one=gs
+
+qgraf.options=onshell,notadpole,nosnail
+
+PSP_chk_method=Rotation
+
+nlo_prefactors=0
+polvec=explicit
+extensions=quadruple,better_num,olp_badpts
+reduction_programs=ninja

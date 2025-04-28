@@ -1,0 +1,85 @@
+module     p0_ubaru_httbar_abbrevd64h14
+   use p0_ubaru_httbar_config, only: ki
+   use p0_ubaru_httbar_kinematics, only: epstensor
+   use p0_ubaru_httbar_globalsh14
+   implicit none
+   private
+   complex(ki), dimension(23), public :: abb64
+   complex(ki), public :: R2d64
+   public :: init_abbrev
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+contains
+   subroutine     init_abbrev()
+      use p0_ubaru_httbar_config, only: deltaOS, &
+     &    logfile, debug_nlo_diagrams
+      use p0_ubaru_httbar_kinematics
+      use p0_ubaru_httbar_model
+      use p0_ubaru_httbar_color, only: TR
+      use p0_ubaru_httbar_globalsl1, only: epspow
+      implicit none
+      abb64(1)=1.0_ki/(-mT**2+es34)
+      abb64(2)=NC**(-1)
+      abb64(3)=spak2l5**(-1)
+      abb64(4)=spbl5k2**(-1)
+      abb64(5)=sqrt(mT**2)
+      abb64(6)=spak2l4**(-1)
+      abb64(7)=2.0_ki*c2
+      abb64(8)=abb64(7)*spbl4l3
+      abb64(9)=c1*spbl4l3
+      abb64(10)=abb64(9)*abb64(2)
+      abb64(8)=abb64(8)-abb64(10)
+      abb64(8)=abb64(8)*abb64(2)
+      abb64(8)=abb64(8)-abb64(9)
+      abb64(9)=spak2l3*abb64(3)
+      abb64(10)=mT**2
+      abb64(11)=abb64(9)*abb64(10)
+      abb64(12)=abb64(1)*gHT*e*i_*gs**4*TR**2
+      abb64(13)=abb64(12)*spbl5k1
+      abb64(13)=4.0_ki*abb64(13)
+      abb64(14)=abb64(13)*abb64(8)*abb64(11)*abb64(4)
+      abb64(13)=abb64(13)*spak2l3*abb64(8)
+      abb64(12)=2.0_ki*abb64(12)
+      abb64(15)=abb64(12)*spbl5k1
+      abb64(16)=abb64(15)*spak2l5*abb64(8)
+      abb64(17)=abb64(15)*spak1k2*abb64(8)
+      abb64(18)=-abb64(15)*spal3l5*abb64(8)
+      abb64(19)=abb64(2)*c1
+      abb64(7)=abb64(7)-abb64(19)
+      abb64(20)=abb64(5)**2
+      abb64(10)=abb64(20)-abb64(10)
+      abb64(20)=-abb64(2)*abb64(10)*abb64(7)
+      abb64(10)=c1*abb64(10)
+      abb64(10)=abb64(10)+abb64(20)
+      abb64(10)=abb64(10)*abb64(15)
+      abb64(20)=abb64(5)-mT
+      abb64(20)=abb64(20)*spak2l3*abb64(6)
+      abb64(21)=c1*mT
+      abb64(22)=abb64(20)*abb64(21)
+      abb64(23)=2.0_ki*mT
+      abb64(23)=abb64(23)*c2
+      abb64(19)=abb64(19)*mT
+      abb64(19)=abb64(23)-abb64(19)
+      abb64(20)=-abb64(2)*abb64(20)*abb64(19)
+      abb64(20)=abb64(22)+abb64(20)
+      abb64(15)=abb64(20)*abb64(15)
+      abb64(9)=-abb64(8)*abb64(5)*abb64(9)*mT
+      abb64(8)=-spbl5k1*spak1l3*abb64(8)
+      abb64(8)=abb64(8)+abb64(9)
+      abb64(8)=abb64(8)*abb64(12)
+      abb64(9)=abb64(5)+mT
+      abb64(9)=abb64(3)*abb64(9)
+      abb64(20)=-abb64(9)*abb64(21)
+      abb64(9)=abb64(2)*abb64(9)*abb64(19)
+      abb64(9)=abb64(20)+abb64(9)
+      abb64(9)=abb64(9)*abb64(12)
+      abb64(7)=abb64(2)*abb64(7)
+      abb64(7)=-c1+abb64(7)
+      abb64(7)=abb64(12)*abb64(7)*abb64(11)*abb64(6)
+      R2d64=0.0_ki
+      rat2 = rat2 + R2d64
+      if (debug_nlo_diagrams) then
+          write (logfile,*) "<result name='r2' index='64' value='", &
+          & R2d64, "'/>"
+      end if
+   end subroutine
+end module p0_ubaru_httbar_abbrevd64h14

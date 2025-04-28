@@ -1,0 +1,99 @@
+module     p0_ubaru_httbar_d39h14l1_qp
+   ! file: /itp/swift/jannisl/fast/POWHEG-BOX-V2/ttH_for_samplecpp_updated/GoSa &
+   ! &m_POWHEG/Virtual/p0_ubaru_httbar/helicity14d39h14l1_qp.f90
+   ! generator: buildfortran.py
+   use p0_ubaru_httbar_config, only: ki => ki_qp
+   use p0_ubaru_httbar_util_qp, only: cond
+   implicit none
+   private
+   complex(ki), parameter :: i_ = (0.0_ki, 1.0_ki)
+   public :: numerator_ninja
+contains
+!---#[ function brack_1:
+   pure function brack_1(Q,mu2) result(brack)
+      use p0_ubaru_httbar_model_qp
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_color_qp
+      use p0_ubaru_httbar_abbrevd39h14_qp
+      implicit none
+      complex(ki), dimension(4), intent(in) :: Q
+      complex(ki), intent(in) :: mu2
+      complex(ki) :: brack
+      complex(ki) :: acc39(18)
+      complex(ki) :: Qspvak2l4
+      complex(ki) :: Qspvak2l5
+      complex(ki) :: Qspval3l5
+      complex(ki) :: Qspval3l4
+      complex(ki) :: Qspvak2l3
+      complex(ki) :: Qspvak2k1
+      complex(ki) :: Qspk1
+      complex(ki) :: Qspk2
+      complex(ki) :: Qspval3k1
+      complex(ki) :: QspQ
+      Qspvak2l4 = dotproduct(Q,spvak2l4)
+      Qspvak2l5 = dotproduct(Q,spvak2l5)
+      Qspval3l5 = dotproduct(Q,spval3l5)
+      Qspval3l4 = dotproduct(Q,spval3l4)
+      Qspvak2l3 = dotproduct(Q,spvak2l3)
+      Qspvak2k1 = dotproduct(Q,spvak2k1)
+      Qspk1 = dotproduct(Q,k1)
+      Qspk2 = dotproduct(Q,k2)
+      Qspval3k1 = dotproduct(Q,spval3k1)
+      QspQ = dotproduct(Q,Q)
+      acc39(1)=abb39(10)
+      acc39(2)=abb39(11)
+      acc39(3)=abb39(12)
+      acc39(4)=abb39(13)
+      acc39(5)=abb39(15)
+      acc39(6)=abb39(16)
+      acc39(7)=abb39(17)
+      acc39(8)=abb39(18)
+      acc39(9)=abb39(19)
+      acc39(10)=abb39(21)
+      acc39(11)=abb39(23)
+      acc39(12)=abb39(26)
+      acc39(13)=acc39(7)*Qspvak2l4
+      acc39(14)=acc39(12)*Qspvak2l5
+      acc39(15)=Qspval3l5*acc39(6)
+      acc39(16)=Qspval3l4*acc39(9)
+      acc39(17)=Qspvak2l3*acc39(4)
+      acc39(13)=acc39(17)+acc39(16)+acc39(15)+acc39(14)+acc39(13)+acc39(2)
+      acc39(13)=Qspvak2k1*acc39(13)
+      acc39(14)=Qspk1+Qspk2
+      acc39(14)=acc39(5)*acc39(14)
+      acc39(15)=acc39(1)*Qspvak2l4
+      acc39(16)=acc39(11)*Qspvak2l5
+      acc39(17)=Qspval3k1*acc39(10)
+      acc39(18)=QspQ*acc39(3)
+      brack=acc39(8)+acc39(13)+acc39(14)+acc39(15)+acc39(16)+acc39(17)+acc39(18)
+   end  function brack_1
+!---#] function brack_1:
+!---#[ numerator interfaces:
+   !------#[ subroutine numerator_ninja:
+   subroutine numerator_ninja(ncut, Q_ext, mu2_ext, numerator) &
+   & bind(c, name="p0_ubaru_httbar_d39h14l1_qp_ninja")
+      use iso_c_binding, only: c_int
+      use quadninjago_module, only: ki_nin
+      use p0_ubaru_httbar_globalsl1_qp, only: epspow
+      use p0_ubaru_httbar_kinematics_qp
+      use p0_ubaru_httbar_abbrevd39h14_qp
+      implicit none
+      integer(c_int), intent(in) :: ncut
+      complex(ki_nin), dimension(0:3), intent(in) :: Q_ext
+      complex(ki_nin), intent(in) :: mu2_ext
+      complex(ki_nin), intent(out) :: numerator
+      complex(ki) :: d39
+      ! The Q that goes into the diagram
+      complex(ki), dimension(4) :: Q
+      complex(ki) :: mu2
+      real(ki), dimension(0:3) :: qshift
+      qshift = -k3-k4-k5
+      Q(1:4)  =cmplx(real(-Q_ext(0:3)  -qshift(:),  ki_nin), aimag(-Q_ext(0:3))&
+      &, ki)
+      d39 = 0.0_ki
+      d39 = (cond(epspow.eq.0,brack_1,Q,mu2))
+      numerator = cmplx(real(d39, ki), aimag(d39), ki_nin)
+   end subroutine numerator_ninja
+   !------#] subroutine numerator_ninja:
+!---#] numerator interfaces:
+end module p0_ubaru_httbar_d39h14l1_qp
