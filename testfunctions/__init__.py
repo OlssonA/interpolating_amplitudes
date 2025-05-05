@@ -54,12 +54,26 @@ def f1_map(points, bounds = [0.96, 1, np.pi, np.pi, 2*np.pi]):
     return amp0, w*beta2_factor
 
 def f1_normal(x1, x2, x3, x4, x5):
-    if x5 >= 0.5: x5 = 1-x5
-    if x4 >= 0.5: x3 = 1-x3; x4 = 1-x4
-    if x3 >= 0.5: x3 = 1-x3; x5 = x5+0.5
-    if x5 >= 1:   x5 = x5-1
-    if x5 >= 0.5: x5 = 1-x5
+    #if x5 >= 0.5: x5 = 1-x5
+    #if x4 >= 0.5: x3 = 1-x3; x4 = 1-x4
+    #if x3 >= 0.5: x3 = 1-x3; x5 = x5+0.5
+    #if x5 >= 1:   x5 = x5-1
+    #if x5 >= 0.5: x5 = 1-x5
+    cond = x5 >= 0.5
+    x5 = np.where(cond, 1-x5, x5)
+    cond = x4 >= 0.5
+    x3 = np.where(cond, 1-x3, x3)
+    x4 = np.where(cond, 1-x4, x4)
+    cond = x3 >= 0.5
+    x3 = np.where(cond, 1-x3, x3)
+    x5 = np.where(cond, x5+0.5, x5)
+    cond = x5 >= 1.0
+    x5 = np.where(cond, x5-1, x5)
+    cond = x5 >= 0.5
+    x5 = np.where(cond, 1-x5, x5)
     return (x1, x2, x3, x4, x5)
+
+f1_normal_range = [(0.,1.), (0.,1.), (0.,0.5), (0.,0.5), (0.,0.5)]
 
 def f1_weight(x1, x2, x3, x4, x5):
     beta2, fstt, theta_h, theta_t, phi_t = f1_x_to_par(x1, x2, x3, x4, x5)
@@ -94,9 +108,16 @@ def f2_map(points, bounds = [0.96, 1, np.pi, np.pi, 2*np.pi]):
     return amp1-amp1coulomb, w*beta2_factor
 
 def f2_normal(x1, x2, x3, x4, x5):
-    if x4 >= 0.5: x3 = 1-x3; x4 = 1-x4
-    if x5 >= 0.5: x5 = 1-x5
+    #if x4 >= 0.5: x3 = 1-x3; x4 = 1-x4
+    #if x5 >= 0.5: x5 = 1-x5
+    cond = x4 >= 0.5
+    x3 = np.where(cond, 1-x3, x3)
+    x4 = np.where(cond, 1-x4, x4)
+    cond = x5 >= 0.5
+    x5 = np.where(cond, 1-x5, x5)
     return (x1, x2, x3, x4, x5)
+
+f2_normal_range = [(0.,1.), (0.,1.), (0.,1.), (0.,0.5), (0.,0.5)]
 
 def f2_weight(x1, x2, x3, x4, x5):
     return f1_weight(x1, x2, x3, x4, x5)
@@ -128,6 +149,8 @@ def f3_map(points, bounds = [0.96, 1, np.pi, np.pi, 2*np.pi]):
 
 def f3_normal(x1, x2, x3, x4, x5):
     return f1_normal(x1, x2, x3, x4, x5)
+
+f3_normal_range = f1_normal_range
 
 def f3_weight(x1, x2, x3, x4, x5):
     beta2, fstt, theta_h, theta_t, phi_t = f3_x_to_par(x1, x2, x3, x4, x5)
@@ -163,6 +186,8 @@ def f4_map(points, bounds = [0.96, 1, np.pi, np.pi, 2*np.pi]):
 
 def f4_normal(x1, x2, x3, x4, x5):
     return f1_normal(x1, x2, x3, x4, x5)
+
+f4_normal_range = f1_normal_range
 
 def f4_weight(x1, x2, x3, x4, x5):
     return f3_weight(x1, x2, x3, x4, x5)
@@ -234,8 +259,12 @@ def f5_map(points, bounds = [0.99, np.pi]):
     return amp1, w*beta2_factor*J_factor
 
 def f5_normal(x1, x2):
-    if x2 >= 0.5: x2 = 1-x2
+    #if x2 >= 0.5: x2 = 1-x2
+    cond = x2 >= 0.5
+    x2 = np.where(cond, 1-x2, x2)
     return (x1, x2)
+
+f5_normal_range = [(0.,1.), (0.,0.5)]
 
 def f5_weight(x1, x2):
     min_beta2, max_beta2 = 0.33, 0.99
